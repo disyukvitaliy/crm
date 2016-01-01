@@ -1,2 +1,29 @@
-Hello World!
-This is some difference
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">List of all projects</div>
+  </div>
+
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Body</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @projects.each_with_index do |p, i| %>
+      <tr>
+        <td><%= i + 1 %></td>
+        <td><%= p.title %></td>
+        <td><%= p.body %></td>
+        <td>edit</td>
+      </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+
+</div>

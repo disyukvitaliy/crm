@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+5.times do |i|
+  Project.create do |p|
+    p.title = "Project ##{i+1}"
+    p.body = "Some description for this simple project ##{i+1}"
+    p.alias = "project-#{i+1}"
+  end
+end
+puts 'Projects: Several entries has been added.'
