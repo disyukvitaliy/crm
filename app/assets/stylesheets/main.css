@@ -1,0 +1,11 @@
+body{
+  padding-top: 30px;
+}
+
+.panel-ava{
+  padding: 15px 0 5px;
+}
+
+.panel-ava img{
+  border: solid 1px;
+}
