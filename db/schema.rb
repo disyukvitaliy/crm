@@ -17,11 +17,19 @@ ActiveRecord::Schema.define(version: 20151231121957) do
   enable_extension "plpgsql"
 
   create_table "projects", force: :cascade do |t|
-    t.string   "title",      limit: 255, null: false
+    t.text     "title",                  null: false
     t.text     "body",                   null: false
-    t.string   "alias",      limit: 255, null: false
+    t.text     "alias",                  null: false
+    t.integer  "parent_id"
+    t.integer  "lft",                    null: false
+    t.integer  "rgt",                    null: false
+    t.integer  "depth",      default: 0, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "projects", ["lft"], name: "index_projects_on_lft", using: :btree
+  add_index "projects", ["parent_id"], name: "index_projects_on_parent_id", using: :btree
+  add_index "projects", ["rgt"], name: "index_projects_on_rgt", using: :btree
 
 end

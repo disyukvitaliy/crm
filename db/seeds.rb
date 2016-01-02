@@ -13,4 +13,8 @@
     p.alias = "project-#{i+1}"
   end
 end
+
+Project.find(2).update_attribute(:parent_id, 1)
+Project.find(5).update_attribute(:parent_id, 3)
+
 puts 'Projects: Several entries has been added.'
