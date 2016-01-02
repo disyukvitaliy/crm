@@ -1,0 +1,46 @@
+.container
+  .row
+    .col-md-3
+      .panel.panel-default.text-center
+        .panel-heading.panel-ava
+          = image_tag 'ava.jpeg', width: 50
+          %h5 John Smith
+          %h6 johnsmith@gmail.com
+      .panel-group{:role => "tablist"}
+        .panel.panel-default
+          #collapseListGroupHeading1.panel-heading{:role => "tab"}
+            %h4.panel-title
+              %a{"aria-controls" => "collapseListGroup1", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseListGroup1", :role => "button"}
+                Collapsible list group
+          #collapseListGroup1.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "collapseListGroupHeading1", :role => "tabpanel"}
+            %ul.list-group
+              %li.list-group-item Bootply
+              %li.list-group-item One itmus ac facilin
+              %li.list-group-item Second eros
+        .panel.panel-default
+          #collapseListGroupHeading2.panel-heading{:role => "tab"}
+            %h4.panel-title
+              %a{"aria-controls" => "collapseListGroup2", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseListGroup2", :role => "button"}
+                Collapsible list group
+          #collapseListGroup2.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "collapseListGroupHeading2", :role => "tabpanel"}
+            %ul.list-group
+              %li.list-group-item Bootply
+              %li.list-group-item One itmus ac facilin
+              %li.list-group-item Second eros
+    .col-md-9
+      .panel.panel-default.no-bottom-margin
+        .panel-heading List of all projects
+      %table.table.table-striped.table-hover
+        %thead
+          %tr
+            %th #
+            %th Title
+            %th Body
+            %th Actions
+        %tbody
+          - @projects.each_with_index do |p, i|
+            %tr
+              %td= i + 1
+              %td= p.title
+              %td= p.body
+              %td edit
