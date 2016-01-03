@@ -11,5 +11,7 @@
       %tr
         %td= i + 1
         %td= p.title
-        %td= p.body
-        %td edit
+        %td= truncate p.body, length: 30, separator: ' '
+        %td
+          =link_to 'edit', edit_project_path(p)
+          =link_to 'delete', edit_project_path(p)
