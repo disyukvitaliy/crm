@@ -1,0 +1,13 @@
+.well
+  = bootstrap_form_for @project, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10" do |f|
+    .form-group
+      .col-sm-10.col-sm-offset-2
+        =f.alert_message "Please fix the errors below.", error_summary: false, class: 'alert alert-danger'
+    =f.text_field :title, placeholder: 'title'
+    =f.text_field :alias, placeholder: 'alias', help: "You can leave this field blank. This case it will filled automatically."
+    =f.text_area :descr, placeholder: 'description', class: 'vresize'
+    =f.collection_select(:parent_id, Project.all, :id, :title, {:prompt => 'Select'})
+    .form-group
+      .col-sm-10.col-sm-offset-2
+        =f.submit "Create", class: 'btn btn-primary', wrapper: {class: 'has-warning'}
+        =button_tag "Cancel ", class: 'btn btn-default', type: 'reset'
