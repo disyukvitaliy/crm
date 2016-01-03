@@ -9,7 +9,7 @@
 5.times do |i|
   Project.create do |p|
     p.title = "Project ##{i+1}"
-    p.body = "Some description for this simple project ##{i+1}"
+    p.descr = "Some description for this simple project ##{i+1}"
     p.alias = "project-#{i+1}"
   end
 end

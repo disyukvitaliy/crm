@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20151231121957) do
 
   create_table "projects", force: :cascade do |t|
     t.text     "title",                  null: false
-    t.text     "body",                   null: false
+    t.text     "descr",                  null: false
     t.text     "alias",                  null: false
     t.integer  "parent_id"
     t.integer  "lft",                    null: false

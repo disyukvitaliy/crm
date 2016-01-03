@@ -4,14 +4,14 @@
     %tr
       %th #
       %th Title
-      %th Body
+      %th Description
       %th Actions
   %tbody
     - @projects.each_with_index do |p, i|
       %tr
         %td= i + 1
         %td= p.title
-        %td= truncate p.body, length: 30, separator: ' '
+        %td= truncate p.descr, length: 30, separator: ' '
         %td
           =link_to 'edit', edit_project_path(p)
-          =link_to 'delete', edit_project_path(p)
+          =link_to 'Delete', project_path(p), method: :delete, data: { confirm: 'Are you sure?' }

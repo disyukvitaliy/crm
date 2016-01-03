@@ -2,7 +2,7 @@ class CreateProjects < ActiveRecord::Migration
   def change
     create_table :projects do |t|
       t.text :title, null: false
-      t.text :body, null: false
+      t.text :descr, null: false
       t.text :alias, null: false
       t.integer :parent_id, index: true
       t.integer :lft, null: false, index: true
