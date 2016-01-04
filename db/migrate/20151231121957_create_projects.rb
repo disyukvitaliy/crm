@@ -4,6 +4,7 @@ class CreateProjects < ActiveRecord::Migration
       t.text :title, null: false
       t.text :descr, null: false
       t.text :alias, null: false
+      t.integer :status, :limit => 1, default: 1
       t.integer :parent_id, index: true
       t.integer :lft, null: false, index: true
       t.integer :rgt, null: false, index: true

@@ -3,6 +3,8 @@ class Project < ActiveRecord::Base
   # gem awesome_nested_set
   acts_as_nested_set
 
+  enum status: [:archived, :active]
+
   validates :title, uniqueness: true, presence: true
   validates :alias, uniqueness: true
 

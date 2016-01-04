@@ -3,7 +3,7 @@ class ProjectsController < ActionController::Base
   layout "application"
 
   def index
-    @projects = Project.all
+    @project_grid = initialize_grid(Project, order: 'projects.title', per_page: 5)
   end
 
   def show
