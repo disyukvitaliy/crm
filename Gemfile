@@ -33,6 +33,8 @@ gem 'bootstrap_form'
 
 gem "wice_grid", '3.6.0.pre4'
 
+gem "strip_attributes"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -45,6 +47,10 @@ gem "wice_grid", '3.6.0.pre4'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+
+  gem 'rspec-rails', '~> 3.0'
+
+  gem 'capybara'
 end
 
 group :development do

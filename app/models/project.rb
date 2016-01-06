@@ -1,5 +1,8 @@
 class Project < ActiveRecord::Base
 
+  # gem strip_attributes
+  strip_attributes
+
   # gem awesome_nested_set
   acts_as_nested_set
 
