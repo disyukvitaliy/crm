@@ -1,0 +1,15 @@
+%h3 Issues
+= grid @issue_grid do |g|
+
+  - g.blank_slate "There is no any issues"
+
+  - g.column name: 'ID', attribute: 'id', ordering: false, filter: false
+
+  - g.column name: 'Subject', attribute: 'subj' do |i|
+    - link_to(i.subj, issue_path(i))
+
+  - g.column name: 'Due date', attribute: 'due_date', filter_type: :string
+
+  - g.column do |i|
+    - link_to('Edit', edit_issue_path(i)) + ' ' +
+    - link_to('Delete', issue_path(i), method: :delete, data: {confirm: 'Are you sure?'})

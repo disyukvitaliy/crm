@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Subj:
+  = @issue.subj
+%p
+  %b Descr:
+  = @issue.descr
+%p
+  %b Start date:
+  = @issue.start_date
+%p
+  %b Due date:
+  = @issue.due_date
+
+= link_to 'Edit', edit_issue_path(@issue)
+\|
+= link_to 'Back', project_issues_path(@issue.project)

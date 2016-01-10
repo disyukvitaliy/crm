@@ -6,6 +6,8 @@ class Project < ActiveRecord::Base
   # gem awesome_nested_set
   acts_as_nested_set
 
+  has_many :issues
+
   enum status: [:archived, :active]
 
   validates :title, uniqueness: true, presence: true
