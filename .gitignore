@@ -2,3 +2,6 @@ tmp/
 log/
 config/database.yml
 .byebug_history
+
+# Aptana studio
+.project
