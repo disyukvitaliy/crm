@@ -2,8 +2,9 @@ class IssuesController < ApplicationController
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
 
   def index
-    issues = Project.find(params[:project_id]).issues
-    @issue_grid = initialize_grid(issues, order: 'issues.subj', per_page: 5)
+    @issues_grid = IssuesGrid.new(params[:projects_grid]) do
+      Project.find(params[:project_id]).issues.page(params[:page]).per(5)
+    end
   end
 
   def show
