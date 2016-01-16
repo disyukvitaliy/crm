@@ -31,11 +31,13 @@ gem 'awesome_nested_set'
 
 gem 'bootstrap_form'
 
-gem "strip_attributes"
+gem 'strip_attributes'
 
-gem 'datagrid', '~> 1.4'
+gem 'kaminari'
 
 gem 'bootstrap-kaminari-views'
+
+gem 'datagrid', '~> 1.4'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
