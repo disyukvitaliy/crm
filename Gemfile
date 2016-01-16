@@ -31,9 +31,11 @@ gem 'awesome_nested_set'
 
 gem 'bootstrap_form'
 
-gem "wice_grid", '3.6.0.pre4'
-
 gem "strip_attributes"
+
+gem 'datagrid', '~> 1.4'
+
+gem 'bootstrap-kaminari-views'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
