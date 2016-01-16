@@ -3,7 +3,9 @@ class ProjectsController < ActionController::Base
   layout "application"
 
   def index
-    @project_grid = initialize_grid(Project, order: 'projects.title', per_page: 5)
+    @projects_grid = ProjectsGrid.new(params[:projects_grid]) do |scope|
+      scope.page(params[:page]).per(5)
+    end
   end
 
   def show

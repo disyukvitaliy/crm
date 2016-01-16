@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-7.times do |i|
+11.times do |i|
   Project.create do |p|
     p.title = "Project ##{i+1}"
     p.descr = "Some description for this simple project ##{i+1}"
