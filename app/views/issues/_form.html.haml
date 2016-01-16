@@ -1,0 +1,13 @@
+.well
+  = bootstrap_form_for @issue, url: form_path, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10" do |f|
+    .form-group
+      .col-sm-10.col-sm-offset-2
+        =f.alert_message "Please fix the errors below.", error_summary: false, class: 'alert alert-danger'
+    =f.text_field :subj, placeholder: 'Subject'
+    =f.text_area :descr, placeholder: 'Description', class: 'vresize'
+    =f.text_field :start_date, placeholder: 'Start Date'
+    =f.text_field :due_date, placeholder: 'Due Date'
+    .form-group
+      .col-sm-10.col-sm-offset-2
+        =f.submit "Create", class: 'btn btn-primary', wrapper: {class: 'has-warning'}
+        =button_tag "Cancel ", class: 'btn btn-default', type: 'reset'

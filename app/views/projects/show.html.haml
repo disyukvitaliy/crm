@@ -1,0 +1,18 @@
+%h3 Project
+
+%p#notice= notice
+
+%p
+  %b Subj:
+  = @project.title
+%p
+  %b Descr:
+  = @project.descr
+
+= link_to 'Edit', edit_project_path(@project)
+\|
+= link_to 'Back', projects_path
+\|
+= link_to 'Issues', project_issues_path(@project)
+\|
+= link_to 'New issue', new_project_issue_path(@project)
