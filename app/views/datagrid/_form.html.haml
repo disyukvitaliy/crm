@@ -1,0 +1,12 @@
+-# Overrided partial for datagrid gem
+= form_for grid, options.merge({html: {class: 'form-horizontal'}}) do |f|
+  - grid.filters.each do |filter|
+    .datagrid-filter.filter.form-group
+      = f.datagrid_label filter, {class: 'col-sm-2 control-label'}
+      .col-sm-4
+        = f.datagrid_filter filter, {partials: options[:partials], class: 'form-control input-sm'}
+  .form-group
+    .col-sm-10.col-sm-offset-2
+      = f.submit I18n.t("datagrid.form.search").html_safe, :class => "datagrid-submit btn btn-primary btn-sm"
+      - empty_parameter = Rails.version >= "4.1.0" && Rails.version <= '4.1.2' ? nil : {}
+      = link_to I18n.t('datagrid.form.reset').html_safe, url_for(grid.to_param => empty_parameter), :class => "datagrid-reset btn btn-default btn-sm"

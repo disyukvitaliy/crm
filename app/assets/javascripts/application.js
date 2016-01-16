@@ -12,6 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require wice_grid.js
 //= require turbolinks
 //= require_tree .
