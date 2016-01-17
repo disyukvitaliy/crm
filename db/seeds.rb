@@ -7,10 +7,17 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 11.times do |i|
-  Project.create do |p|
+  project = Project.create do |p|
     p.title = "Project ##{i+1}"
     p.descr = "Some description for this simple project ##{i+1}"
     p.alias = "project-#{i+1}"
+  end
+
+  project.issues.create do |is|
+    is.subj = "Issue ##{i+1}"
+    is.descr = "Some description for this simple issue ##{i+1}"
+    is.start_date = i.day.from_now.strftime("%Y-%m-%d")
+    is.due_date = i.day.from_now.strftime("%Y-%m-%d")
   end
 end
 

@@ -60,33 +60,9 @@
             = image_tag 'ava.jpeg', width: 50
             %h5 John Smith
             %h6 johnsmith@gmail.com
-          .panel-group{:role => "tablist"}
-            .panel.panel-default
-              #collapseListGroupHeading1.panel-heading{:role => "tab"}
-                %h4.panel-title
-                  %a{"aria-controls" => "collapseListGroup1", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseListGroup1", :role => "button"}
-                    Projects
-              #collapseListGroup1.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "collapseListGroupHeading1", :role => "tabpanel"}
-                %ul.list-group
-                  %li.list-group-item
-                    =link_to 'New project', new_project_path
-                  %li.list-group-item
-                    =link_to 'Show all', projects_path
-                  %li.list-group-item
-                    =link_to 'Only parents', projects_path
-            .panel.panel-default
-              #collapseListGroupHeading2.panel-heading{:role => "tab"}
-                %h4.panel-title
-                  %a{"aria-controls" => "collapseListGroup2", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapseListGroup2", :role => "button"}
-                    Issues
-              #collapseListGroup2.panel-collapse.collapse{"aria-expanded" => "false", "aria-labelledby" => "collapseListGroupHeading2", :role => "tabpanel"}
-                %ul.list-group
-                  %li.list-group-item
-                    =link_to 'New issue', new_project_path
-                  %li.list-group-item
-                    =link_to 'Show all', new_project_path
-                  %li.list-group-item
-                    =link_to 'This project', new_project_path
+
+          = render 'layouts/left_menu'
+
         .col-md-9
           %ul.breadcrumb
             %li

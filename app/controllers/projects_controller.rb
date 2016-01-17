@@ -1,6 +1,6 @@
-class ProjectsController < ActionController::Base
-
-  layout "application"
+class ProjectsController < ApplicationController
+  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :send_project_id_to_left_menu, :only => [:show, :edit]
 
   def index
     @projects_grid = ProjectsGrid.new(params[:projects_grid]) do |scope|
@@ -9,7 +9,6 @@ class ProjectsController < ActionController::Base
   end
 
   def show
-    @project = Project.find(params[:id])
   end
 
   def new
@@ -17,7 +16,6 @@ class ProjectsController < ActionController::Base
   end
 
   def edit
-    @project = Project.find(params[:id])
   end
 
   def create
@@ -31,8 +29,6 @@ class ProjectsController < ActionController::Base
   end
 
   def update
-    @project = Project.find(params[:id])
-
     if @project.update(project_params)
       redirect_to action: "index"
     else
@@ -41,13 +37,22 @@ class ProjectsController < ActionController::Base
   end
 
   def destroy
-    Project.destroy(params[:id])
+    @project.destroy
     redirect_to projects_path
   end
 
   private
+
+    def set_project
+      @project = Project.find(params[:id])
+    end
+
     def project_params
       params.require(:project).permit(:title, :alias, :descr, :parent_id)
+    end
+
+    def send_project_id_to_left_menu
+      LeftMenu.instance.project_id @project.id
     end
 
 end
