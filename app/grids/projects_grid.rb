@@ -6,8 +6,8 @@ class ProjectsGrid
     Project
   end
 
-  filter(:status, :enum, :select => {archived: 0, active: 1})
-  filter(:title, :string) { |value| where("title ilike '%#{value}%'") }
+  filter(:status, :enum, {select: Project.statuses, attr: {class: 'form-control input-sm'}})
+  filter(:title, {attr: {class: 'form-control input-sm'}}) { |val| where("title ilike '%#{val}%'") }
 
   column(:id)
   column(:title, html: true) do |p|

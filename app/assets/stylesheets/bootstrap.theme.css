@@ -1,6 +1,14 @@
-a, a:hover, a:focus {
+/*Custom themesation. Used for correcting bootstrap mistakes, and adding extra styles*/
+
+a,
+a:hover,
+a:focus {
   color: #fff;
 }
 .vresize {
   resize: vertical;
+}
+.datepicker table tr td.day:hover,
+.datepicker table tr td.focused{
+  background: #DF691A none repeat scroll 0% 0%
 }

@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
 
   has_many :issues
 
-  enum status: [:archived, :active]
+  enum status: {archived: 0, active: 1}
 
   validates :title, uniqueness: true, presence: true
   validates :alias, uniqueness: true

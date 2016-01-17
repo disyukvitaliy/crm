@@ -2,7 +2,7 @@ class IssuesController < ApplicationController
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
 
   def index
-    @issues_grid = IssuesGrid.new(params[:projects_grid]) do
+    @issues_grid = IssuesGrid.new(params[:issues_grid]) do
       Project.find(params[:project_id]).issues.page(params[:page]).per(5)
     end
   end

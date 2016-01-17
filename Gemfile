@@ -31,6 +31,8 @@ gem 'awesome_nested_set'
 
 gem 'bootstrap_form'
 
+gem 'bootstrap-datepicker-rails'
+
 gem 'strip_attributes'
 
 gem 'kaminari'
