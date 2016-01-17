@@ -1,6 +1,13 @@
 class IssuesController < ApplicationController
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
 
+  def all
+    @issues_grid = IssuesGrid.new(params[:issues_grid]) do |scope|
+      scope.page(params[:page]).per(5)
+    end
+    render :index
+  end
+
   def index
     @issues_grid = IssuesGrid.new(params[:issues_grid]) do
       Project.find(params[:project_id]).issues.page(params[:page]).per(5)

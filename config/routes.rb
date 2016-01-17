@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'projects#index'
 
+  get 'issues' => 'issues#all', as: :issues
+
   resources :projects do
     resources :issues, shallow: true
   end
