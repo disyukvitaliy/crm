@@ -1,10 +1,9 @@
 class LeftMenu
+  
   include Singleton
-
   attr_accessor :items, :project_id
 
   def initialize
-    @project_id = nil
     @items = {
       projects: {
         type: :tab,
@@ -26,40 +25,28 @@ class LeftMenu
     }
   end
 
-  def get_items
-
-    fill_args @items
-
+  def prepare_items
+    traverse @items
+		self
   end
 
-  def fill_args(items)
-
-    items.each do |fst_lvl_key, item|
-
-      puts item[:type] == :item
-
-      if item[:type] == :tab
-
-        fill_args item[:items]
-
-      elsif item[:type] == :item
-
-        item[:args] = {project_id: @project_id}
-
+  def traverse items
+    items.each do |key, element|
+      if element[:type] == :tab
+        traverse element[:items]
+      elsif element[:type] == :item
+				fill_args_for element
+				define_visibility_for element
       end
-
     end
-
   end
-end
 
-# items.each do |fst_lvl_key, fst_lvl_item|
-#
-#   if fst_lvl_item[:type] == :tab
-#
-#     fst_lvl_item[:items].each do |snd_lvl_key, snd_lvl_item|
-#       puts @items[fst_lvl_key][:items][snd_lvl_key][:args] = {project_id: @project_id}
-#     end
-#   end
-#
-# end
+  def fill_args_for item
+		item[:args] = {project_id: @project_id} if item[:args].has_key?(:project_id)
+  end
+
+  def define_visibility_for item
+		item[:show] = false if item[:args].has_value?(nil)
+  end
+
+end
