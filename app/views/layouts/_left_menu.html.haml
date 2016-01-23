@@ -1,14 +1,6 @@
 .panel-group{role: "tablist"}
 
-  - LeftMenu.instance.items.each_with_index do |(tab_name, items), index|
-    .panel.panel-default
-      .panel-heading{role: "tab", id: "collapseListGroupHeading#{index}"}
-        %h4.panel-title
-          %a{"aria-controls" => "collapseListGroup#{index}", "aria-expanded" => "false", "data-toggle" => "collapse", href: "#collapseListGroup#{index}", role: "button"}
-            = tab_name
-      .panel-collapse.collapse{id: "collapseListGroup#{index}", "aria-expanded" => "false", "aria-labelledby" => "collapseListGroupHeading#{index}", role: "tabpanel"}
-        %ul.list-group
-          - items.each do |key, item|
-            - if item[:show]
-              %li.list-group-item
-                = link_to item[:title], send(item[:path], *item[:args])
+  .list-group.panel.panel-default
+    - LeftMenu.instance.prepare_items.items.each_with_index do |(key, element), index|
+      = render 'layouts/left_menu_tab', element: element if element[:type] == :tab
+      = render 'layouts/left_menu_item', element: element if element[:type] == :item

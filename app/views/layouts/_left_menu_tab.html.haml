@@ -1,0 +1,7 @@
+- group_id = Digest::MD5.hexdigest(element.to_s)
+%a.list-group-item.panel-heading{"data-toggle" => "collapse", :href => "#submenu#{group_id}"}
+  = element[:title]
+.collapse.panel-default{id: "submenu#{group_id}"}
+  - element[:items].each do |key, element|
+    = render 'layouts/left_menu_tab', element if element[:type] == :tab
+    = render 'layouts/left_menu_item', element: element if element[:type] == :item && element[:show]

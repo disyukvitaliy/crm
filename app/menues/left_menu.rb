@@ -1,29 +1,52 @@
 class LeftMenu
+  
   include Singleton
-
-  attr_accessor :items
+  attr_accessor :items, :project_id
 
   def initialize
     @items = {
-      Projects: {
-        show_all: {title: 'Show all', path: :projects_path, args: [], show: true},
-        new: {title: 'Create new', path: :new_project_path, args: [], show: true},
+      projects: {
+        type: :tab,
+        title: :Projects,
+        items: {
+          show_all: {title: 'Show all', type: :item, path: :projects_path, args: {}, show: true},
+          new: {title: 'Create new', type: :item, path: :new_project_path, args: {}, show: true},
+        },
       },
-      Issues: {
-        show_all: {title: 'Show all', path: :issues_path, args: [], show: true},
-        this_project: {title: 'This project only', path: :project_issues_path, args: [], show: false},
-        new: {title: 'Create new', path: :new_project_issue_path, args: [], show: false},
+      issues: {
+        type: :tab,
+        title: :Issues,
+        items: {
+          show_all: {title: 'Show all', type: :item, path: :issues_path, args: {}, show: true},
+          this_project: {title: 'This project only', type: :item, path: :project_issues_path, args: {project_id: nil}, show: true},
+          new: {title: 'Create new', type: :item, path: :new_project_issue_path, args: {project_id: nil}, show: true},
+        },
       },
     }
   end
 
-  def project_id project_id
-    [
-      [:Issues, :this_project],
-      [:Issues, :new],
-    ].each do |block|
-      @items[block[0]][block[1]][:show] = true
-      @items[block[0]][block[1]][:args] = project_id
+  def prepare_items
+    traverse @items
+		self
+  end
+
+  def traverse items
+    items.each do |key, element|
+      if element[:type] == :tab
+        traverse element[:items]
+      elsif element[:type] == :item
+				fill_args_for element
+				define_visibility_for element
+      end
     end
   end
+
+  def fill_args_for item
+		item[:args] = {project_id: @project_id} if item[:args].has_key?(:project_id)
+  end
+
+  def define_visibility_for item
+		item[:show] = false if item[:args].has_value?(nil)
+  end
+
 end
