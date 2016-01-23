@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
-  before_action :send_project_id_to_left_menu, :only => [:show, :edit]
+  #We need next callbacks order: :set_project, :remember_project_id, parent :send_project_id_to_left_menu
+  prepend_before_action :remember_project_id, :only => [:show, :edit]
+  prepend_before_action :forget_project_id, :only => :index
+  prepend_before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def index
     @projects_grid = ProjectsGrid.new(params[:projects_grid]) do |scope|
@@ -51,8 +53,11 @@ class ProjectsController < ApplicationController
       params.require(:project).permit(:title, :alias, :descr, :parent_id)
     end
 
-    def send_project_id_to_left_menu
-      LeftMenu.instance.project_id @project.id
+    def remember_project_id
+      session[:project_id] = @project.id
     end
 
+    def forget_project_id
+      session.delete(:project_id)
+    end
 end

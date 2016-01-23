@@ -56,8 +56,4 @@ class IssuesController < ApplicationController
     def issue_params
       params.require(:issue).permit(:subj, :descr, :start_date, :due_date)
     end
-
-    def send_project_id_to_left_menu
-      LeftMenu.instance.project_id @issue ? @issue.project_id : params[:project_id]
-    end
 end
