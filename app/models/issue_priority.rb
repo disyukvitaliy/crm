@@ -1,0 +1,2 @@
+class IssuePriority < EnumeratorBase
+end

@@ -1,0 +1,13 @@
+.well
+  = bootstrap_form_for @model_object, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10' do |f|
+    .form-group
+      .col-sm-10.col-sm-offset-2
+        = f.alert_message 'Please fix the errors below.', error_summary: false, class: 'alert alert-danger'
+    = f.text_field :title, placeholder: 'title'
+    = f.form_group do
+      = f.check_box :priority, {checked: @model_object.default?}
+      = f.check_box :status, {checked: @model_object.active?}
+    .form-group
+      .col-sm-10.col-sm-offset-2
+        =f.submit 'Create', class: 'btn btn-primary', wrapper: {class: 'has-warning'}
+        =button_tag 'Cancel', class: 'btn btn-default', type: 'reset'

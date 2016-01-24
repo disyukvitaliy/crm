@@ -11,6 +11,17 @@ Rails.application.routes.draw do
     resources :issues, shallow: true
   end
 
+  namespace :admin do
+    resources :activities do
+      member do
+        put 'order_up'
+        put 'order_down'
+      end
+    end
+    resources :issue_priorities
+    resources :enumerators, only: :index
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

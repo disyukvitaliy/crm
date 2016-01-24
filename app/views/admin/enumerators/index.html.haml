@@ -1,0 +1,20 @@
+%h3 Enumerators
+
+
+%h4 Activities
+
+= datagrid_table(@activities_grid, html: {class: 'table table-striped'})
+
+= link_to 'All', admin_activities_path
+\|
+= link_to 'New', new_admin_activity_path
+
+%hr
+
+%h4 Issue priority
+
+= datagrid_table(@issue_priorities_grid, html: {class: 'table table-striped'})
+
+= link_to 'All', admin_issue_priorities_path
+\|
+= link_to 'New', new_admin_issue_priority_path
