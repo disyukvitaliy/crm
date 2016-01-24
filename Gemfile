@@ -41,6 +41,8 @@ gem 'bootstrap-kaminari-views'
 
 gem 'datagrid', '~> 1.4'
 
+gem 'acts_as_orderable'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

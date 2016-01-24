@@ -1,7 +1,7 @@
 class Admin::CrudEnumeratorsController < ApplicationController
   before_action :set_model_class
   before_action :set_grid_model_class, only: :index
-  before_action :set_model, only: [:show, :edit, :update, :destroy]
+  before_action :set_model, only: [:show, :edit, :update, :destroy, :move_up, :move_down]
 
   def index
     @grid_model_object = @grid_model_class.new
@@ -40,11 +40,13 @@ class Admin::CrudEnumeratorsController < ApplicationController
     redirect_to action: 'index'
   end
 
-  def order_up
+  def move_up
+    @model_object.move_up(1)
     redirect_to action: 'index'
   end
 
-  def order_down
+  def move_down
+    @model_object.move_down(1)
     redirect_to action: 'index'
   end
 

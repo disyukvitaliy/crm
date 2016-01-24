@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :activities do
       member do
-        put 'order_up'
-        put 'order_down'
+        put 'move_up'
+        put 'move_down'
       end
     end
     resources :issue_priorities

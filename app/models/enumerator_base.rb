@@ -1,6 +1,9 @@
 class EnumeratorBase < ActiveRecord::Base
   self.abstract_class = true
 
+  # gem acts_as_orderable
+  acts_as_orderable position: :last
+
   enum status: {active: 1, disabled: 0}
   enum priority: {default: 1, common: 0}
 

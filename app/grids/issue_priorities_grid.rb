@@ -3,7 +3,7 @@ class IssuePrioritiesGrid
   include Datagrid
 
   scope do
-    Admin::IssuePriority
+    Admin::IssuePriority.order(:element_order)
   end
 
   column(:id)
@@ -11,8 +11,8 @@ class IssuePrioritiesGrid
   column(:priority)
   column(:status)
   column(:order, html: true) do |i|
-    link_to(:up, order_up_admin_activity_path(i), method: :put) + ' ' +
-    link_to(:down, order_down_admin_activity_path(i), method: :put)
+    link_to(:up, move_up_admin_activity_path(i), method: :put) + ' ' +
+    link_to(:down, move_down_admin_activity_path(i), method: :put)
   end
   column(:actions, html: true) do |i|
     link_to(:edit, edit_admin_issue_priority_path(i)) + ' ' +

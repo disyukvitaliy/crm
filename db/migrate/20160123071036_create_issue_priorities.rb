@@ -4,10 +4,9 @@ class CreateIssuePriorities < ActiveRecord::Migration
       t.string :title
       t.integer :priority, limit: 1, default: 0
       t.integer :status, limit: 1, default: 0
-      t.integer :order, limit: 2
+      t.integer :element_order, default: 0, null: false
 
       t.timestamps null: false
     end
-    add_index :issue_priorities, :order, unique: true
   end
 end
