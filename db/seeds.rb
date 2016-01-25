@@ -16,8 +16,8 @@
   project.issues.create do |is|
     is.subj = "Issue ##{i+1}"
     is.descr = "Some description for this simple issue ##{i+1}"
-    is.start_date = i.day.from_now.strftime("%Y-%m-%d")
-    is.due_date = i.day.from_now.strftime("%Y-%m-%d")
+    is.start_date = i.day.from_now.strftime('%Y-%m-%d')
+    is.due_date = i.day.from_now.strftime('%Y-%m-%d')
   end
 end
 
@@ -25,3 +25,8 @@ Project.find(2).update_attribute(:parent_id, 1)
 Project.find(5).update_attribute(:parent_id, 3)
 
 puts 'Projects: Several entries has been added.'
+puts 'Issues: Several entries has been added.'
+
+Setting.create({site_name: 'CRM'})
+
+puts 'Setting: Default entry has been added.'

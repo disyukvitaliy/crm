@@ -11,6 +11,14 @@ Rails.application.routes.draw do
     resources :issues, shallow: true
   end
 
+  scope 'admin', module: 'admin' do
+    resources :settings, only: :update do
+      collection do
+          get 'edit'
+      end
+    end
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
