@@ -16,7 +16,8 @@ class IssuePrioritiesGrid
   end
   column(:actions, html: true) do |i|
     link_to(:edit, edit_admin_issue_priority_path(i)) + ' ' +
-    link_to(:delete, admin_issue_priority_path(i), method: :delete, data: { confirm: 'Are you sure?' })
+    link_to(:delete, admin_issue_priority_path(i), method: :delete, data: { confirm: 'Are you sure?' }) + ' ' +
+    link_to(:default, set_default_admin_issue_priority_path(i), method: :put)
   end
 
 end

@@ -1,7 +1,7 @@
 class Admin::CrudEnumeratorsController < ApplicationController
   before_action :set_model_class
   before_action :set_grid_model_class, only: :index
-  before_action :set_model, only: [:edit, :update, :destroy, :move_up, :move_down]
+  before_action :set_model, only: [:edit, :update, :destroy, :move_up, :move_down, :set_default]
 
   def index
     form_name = @grid_model_class.model_name.singular
@@ -35,6 +35,11 @@ class Admin::CrudEnumeratorsController < ApplicationController
 
   def destroy
     @model_object.destroy
+    redirect_to action: 'index'
+  end
+
+  def set_default
+    @model_object.as_default!
     redirect_to action: 'index'
   end
 

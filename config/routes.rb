@@ -16,12 +16,14 @@ Rails.application.routes.draw do
       member do
         put 'move_up'
         put 'move_down'
+        put 'set_default'
       end
     end
     resources :issue_priorities, except: :show do
       member do
         put 'move_up'
         put 'move_down'
+        put 'set_default'
       end
     end
     resources :enumerators, only: :index

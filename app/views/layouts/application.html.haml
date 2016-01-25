@@ -36,7 +36,11 @@
                     %a{:href => "#"} Something else here
                   %li.divider
                   %li
-                    %a{:href => "#"} Separated link
+                    = link_to 'Enumerators', admin_enumerators_path
+                  %li
+                    = link_to 'Activities', admin_activities_path
+                  %li
+                    = link_to 'Issue priorities', admin_issue_priorities_path
                   %li.divider
                   %li
                     %a{:href => "#"} One more separated link

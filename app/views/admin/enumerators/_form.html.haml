@@ -4,9 +4,10 @@
       .col-sm-10.col-sm-offset-2
         = f.alert_message 'Please fix the errors below.', error_summary: false, class: 'alert alert-danger'
     = f.text_field :title, placeholder: 'title'
-    = f.form_group do
-      = f.check_box :priority, {checked: @model_object.default?}
-      = f.check_box :status, {checked: @model_object.active?}
+    = f.form_group :priority do
+      = f.check_box :priority, {checked: @model_object.default?, label: 'Default'}
+    = f.form_group :status do
+      = f.check_box :status, {checked: @model_object.active?, label: 'Active'}
     .form-group
       .col-sm-10.col-sm-offset-2
         =f.submit 'Create', class: 'btn btn-primary', wrapper: {class: 'has-warning'}
