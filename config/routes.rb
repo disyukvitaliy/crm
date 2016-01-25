@@ -12,13 +12,18 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :activities do
+    resources :activities, except: :show do
       member do
         put 'move_up'
         put 'move_down'
       end
     end
-    resources :issue_priorities
+    resources :issue_priorities, except: :show do
+      member do
+        put 'move_up'
+        put 'move_down'
+      end
+    end
     resources :enumerators, only: :index
   end
 

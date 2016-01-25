@@ -10,7 +10,7 @@ class IssuePrioritiesGrid
   column(:title)
   column(:priority)
   column(:status)
-  column(:order, html: true) do |i|
+  column(:element_order, html: true) do |i|
     link_to(:up, move_up_admin_activity_path(i), method: :put) + ' ' +
     link_to(:down, move_down_admin_activity_path(i), method: :put)
   end

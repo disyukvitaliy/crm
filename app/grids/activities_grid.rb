@@ -10,7 +10,7 @@ class ActivitiesGrid
   column(:title)
   column(:priority)
   column(:status)
-  column(:order, html: true) do |a|
+  column(:element_order, html: true) do |a|
     link_to(:up, move_up_admin_activity_path(a), method: :put) + ' ' +
     link_to(:down, move_down_admin_activity_path(a), method: :put)
   end

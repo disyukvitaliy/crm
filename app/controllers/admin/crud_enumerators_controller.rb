@@ -1,13 +1,11 @@
 class Admin::CrudEnumeratorsController < ApplicationController
   before_action :set_model_class
   before_action :set_grid_model_class, only: :index
-  before_action :set_model, only: [:show, :edit, :update, :destroy, :move_up, :move_down]
+  before_action :set_model, only: [:edit, :update, :destroy, :move_up, :move_down]
 
   def index
-    @grid_model_object = @grid_model_class.new
-  end
-
-  def show
+    form_name = @grid_model_class.model_name.singular
+    @grid_model_object = @grid_model_class.new(params[form_name])
   end
 
   def new
