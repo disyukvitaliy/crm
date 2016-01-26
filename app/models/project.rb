@@ -16,7 +16,9 @@ class Project < ActiveRecord::Base
   before_validation :transliterate_alias
 
   private
-    def transliterate_alias
-      self.alias = Translit.convert(self.title, :english) if self.alias.blank? & self.title?
-    end
+
+  def transliterate_alias
+    self.alias = Translit.convert(self.title, :english) if self.alias.blank? & self.title?
+  end
+
 end

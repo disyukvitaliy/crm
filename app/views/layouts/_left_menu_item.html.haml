@@ -1,2 +1,2 @@
-%a.list-group-item
-  = element[:title]
+= link_to element[:title], send(element[:path], *element[:args]), class: 'list-group-item'
+

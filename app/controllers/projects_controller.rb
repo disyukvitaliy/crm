@@ -45,19 +45,19 @@ class ProjectsController < ApplicationController
 
   private
 
-    def set_project
-      @project = Project.find(params[:id])
-    end
+  def set_project
+    @project = Project.find(params[:id])
+  end
 
-    def project_params
-      params.require(:project).permit(:title, :alias, :descr, :parent_id)
-    end
+  def project_params
+    params.require(:project).permit(:title, :alias, :descr, :parent_id)
+  end
 
-    def remember_project_id
-      session[:project_id] = @project.id
-    end
+  def remember_project_id
+    session[:project_id] = @project.id
+  end
 
-    def forget_project_id
-      session.delete(:project_id)
-    end
+  def forget_project_id
+    session.delete(:project_id)
+  end
 end

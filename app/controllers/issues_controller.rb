@@ -49,11 +49,11 @@ class IssuesController < ApplicationController
   end
 
   private
-    def set_issue
-      @issue = Issue.find(params[:id])
-    end
+  def set_issue
+    @issue = Issue.find(params[:id])
+  end
 
-    def issue_params
-      params.require(:issue).permit(:subj, :descr, :start_date, :due_date)
-    end
+  def issue_params
+    params.require(:issue).permit(:subj, :descr, :start_date, :due_date)
+  end
 end
