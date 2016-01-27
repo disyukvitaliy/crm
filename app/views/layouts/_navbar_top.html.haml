@@ -1,0 +1,48 @@
+%nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle.collapsed{'data-target' => '#bs-example-navbar-collapse-1', 'data-toggle' => 'collapse', :type => 'button'}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to @settings.site_name, root_path, class: 'navbar-brand'
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li
+          %a{:href => '#'}
+            My page
+            %span.sr-only (current)
+        %li.dropdown
+          %a.dropdown-toggle{'aria-expanded' => 'false', 'data-toggle' => 'dropdown', :href => '#', :role => 'button'}
+            Administration
+            %span.caret
+          %ul.dropdown-menu{:role => 'menu'}
+            %li
+              = link_to 'Settings', edit_settings_path
+            %li
+              = link_to 'Issue statuses', issue_statuses_path
+            %li.divider
+            %li
+              = link_to 'Enumerators', enumerators_path
+            %li
+              = link_to 'Activities', activities_path
+            %li
+              = link_to 'Issue priorities', issue_priorities_path
+            %li.divider
+            %li
+              %a{:href => '#'} One more separated link
+      %form.navbar-form.navbar-left.col-md-3{role: 'search', action: 'https://www.google.ru/search', method: 'GET'}
+        .form-group
+          %input.form-control{placeholder: 'Search', type: 'text', name: 'q'}/
+        %button.btn.btn-default{:type => 'submit'} Find
+      %ul.nav.navbar-nav.navbar-right
+        %li.dropdown
+          %a.dropdown-toggle{'aria-expanded' => 'false', 'data-toggle' => 'dropdown', :href => '#', :role => 'button'}
+            Profile
+            %span.caret
+          %ul.dropdown-menu{:role => 'menu'}
+            %li
+              %a{:href => '#'} Details
+            %li
+              %a{:href => '#'} Logout
