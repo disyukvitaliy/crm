@@ -54,24 +54,28 @@ class Admin::CrudEnumeratorsController < ApplicationController
   end
 
   private
-    def set_model
-      @model_object = @model_class.find(params[:id])
-    end
+  def set_model
+    @model_object = @model_class.find(params[:id])
+  end
 
-    def prepared_params
-      params.require(@model_class.model_name.singular)
-          .permit(:title, :priority, :status)
-    end
+  def prepared_params
+    params.require(@model_class.model_name.singular)
+        .permit(permitted_attributes)
+  end
 
-    # do override in children
-    def set_model_class
-      @model_class = nil
-      raise NotImplementedError, 'Subclasses must define `set_grid_model_class`.'
-    end
+  def permitted_attributes
+    [:title, :priority, :status]
+  end
 
-    # do override in children
-    def set_grid_model_class
-      @grid_model_class = nil
-      raise NotImplementedError, 'Subclasses must define `set_grid_model_class`.'
-    end
+  # do override in children
+  def set_model_class
+    @model_class = nil
+    raise NotImplementedError, 'Subclasses must define `set_grid_model_class`.'
+  end
+
+  # do override in children
+  def set_grid_model_class
+    @grid_model_class = nil
+    raise NotImplementedError, 'Subclasses must define `set_grid_model_class`.'
+  end
 end

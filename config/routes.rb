@@ -13,6 +13,14 @@ Rails.application.routes.draw do
 
   scope 'admin', module: 'admin' do
     resources :enumerators, only: :index
+    resources :issue_statuses, except: :show do
+      member do
+        put 'move_up'
+        put 'move_down'
+        put 'set_default'
+        put 'set_closing'
+      end
+    end
     resources :activities, except: :show do
       member do
         put 'move_up'

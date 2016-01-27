@@ -1,2 +1,3 @@
-class Activity < EnumeratorBase
+class Activity < ActiveRecord::Base
+  include EnumeratorBase
 end

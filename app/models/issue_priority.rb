@@ -1,2 +1,3 @@
-class IssuePriority < EnumeratorBase
+class IssuePriority < ActiveRecord::Base
+  include EnumeratorBase
 end

@@ -1,0 +1,7 @@
+%h3 New issue status
+
+= render layout: 'admin/enumerators/form' do |f|
+  = f.form_group :issue_status do
+    = f.check_box :issue_status, {checked: @model_object.closing?, label: 'Issue closed'}
+
+= link_to 'Back', issue_statuses_path
