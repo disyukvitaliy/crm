@@ -68,6 +68,6 @@ class IssuesController < ApplicationController
   end
 
   def issue_params
-    params.require(:issue).permit(:subj, :descr, :start_date, :due_date)
+    params.require(:issue).permit(:subj, :descr, :start_date, :due_date, :issue_priority_id, :issue_status_id)
   end
 end

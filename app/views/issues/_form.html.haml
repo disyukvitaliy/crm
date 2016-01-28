@@ -1,14 +1,19 @@
 .well
-  = bootstrap_form_for @issue, url: form_path, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10" do |f|
+  = bootstrap_form_for @issue, url: form_path, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10' do |f|
     .form-group
       .col-sm-10.col-sm-offset-2
-        =f.alert_message "Please fix the errors below.", error_summary: false, class: 'alert alert-danger'
+        =f.alert_message 'Please fix the errors below.', error_summary: false, class: 'alert alert-danger'
     =f.text_field :subj, placeholder: 'Subject'
     =f.text_area :descr, placeholder: 'Description', class: 'vresize'
-    =f.text_field :start_date, placeholder: 'Start Date'
-    =f.text_field :due_date, placeholder: 'Due Date'
+    .form-group
+      .col-sm-6
+        =f.text_field :start_date, placeholder: 'Start Date', label_col: 'col-xs-4', control_col: 'col-sm-8', 'data-provide' => 'datepicker', 'data-date-format' => 'yyyy-mm-dd'
+        =f.collection_select(:issue_priority_id, IssuePriority.active.order(:element_order), :id, :title, {selected: @issue.issue_priority_id || IssuePriority.default.first.id, prompt: 'Select priority', label_col: 'col-xs-4', control_col: 'col-sm-8'})
+      .col-sm-6
+        =f.text_field :due_date, placeholder: 'Due Date', label_col: 'col-xs-4', control_col: 'col-sm-8', 'data-provide' => 'datepicker', 'data-date-format' => 'yyyy-mm-dd'
+        =f.collection_select(:issue_status_id, IssueStatus.active.order(:element_order), :id, :title, {selected: @issue.issue_priority_id || IssueStatus.default.first.id, prompt: 'Select status', label_col: 'col-xs-4', control_col: 'col-sm-8'})
     .form-group
       .col-sm-10.col-sm-offset-2
-        =f.submit "Create", class: 'btn btn-primary', wrapper: {class: 'has-warning'}
+        =f.submit 'Create', class: 'btn btn-primary', wrapper: {class: 'has-warning'}
         =link_to(:Delete, issue_path(@issue), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }) if @issue.persisted?
-        =button_tag "Cancel ", class: 'btn btn-default', type: 'reset'
+        =button_tag 'Cancel ', class: 'btn btn-default', type: 'reset'

@@ -14,7 +14,7 @@ module EnumeratorBase
       acts_as_orderable position: :last
 
       validates :title, uniqueness: true, presence: true
-      validates_uniqueness_of :priority, :if => :default?
+      validates_uniqueness_of :priority, if: :default?
 
       # convert string from POST to integer
       def priority= value
