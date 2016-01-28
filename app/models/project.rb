@@ -15,6 +15,10 @@ class Project < ActiveRecord::Base
 
   before_validation :transliterate_alias
 
+  def to_param
+    self.alias
+  end
+
   private
 
   def transliterate_alias

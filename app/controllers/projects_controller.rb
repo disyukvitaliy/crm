@@ -60,7 +60,7 @@ class ProjectsController < ApplicationController
   private
 
   def set_project
-    @project = Project.find(params[:id])
+    @project = Project.find_by_alias(params[:id])
   end
 
   def project_params
@@ -68,7 +68,7 @@ class ProjectsController < ApplicationController
   end
 
   def remember_project_id
-    session[:project_id] = @project.id
+    session[:project_id] = @project.to_param
     reload_left_menu
   end
 

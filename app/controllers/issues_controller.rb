@@ -11,7 +11,7 @@ class IssuesController < ApplicationController
 
   def index
     @issues_grid = IssuesGrid.new(params[:issues_grid]) do
-      Project.find(params[:project_id]).issues.page(params[:page]).per(5)
+      Project.find_by_alias(params[:project_id]).issues.page(params[:page]).per(5)
     end
   end
 
@@ -26,7 +26,7 @@ class IssuesController < ApplicationController
   end
 
   def create
-    @issue = Project.find(params[:project_id]).issues.new(issue_params)
+    @issue = Project.find_by_alias(params[:project_id]).issues.new(issue_params)
 
     if @issue.save
       redirect_to @issue
