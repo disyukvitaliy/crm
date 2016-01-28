@@ -10,4 +10,5 @@
     .form-group
       .col-sm-10.col-sm-offset-2
         =f.submit "Create", class: 'btn btn-primary', wrapper: {class: 'has-warning'}
+        =link_to(:Delete, issue_path(@issue), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }) if @issue.persisted?
         =button_tag "Cancel ", class: 'btn btn-default', type: 'reset'

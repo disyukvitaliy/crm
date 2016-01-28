@@ -31,7 +31,7 @@ class IssuesController < ApplicationController
     if @issue.save
       redirect_to @issue
     else
-      render 'new'
+      render :new
     end
   end
 
@@ -39,13 +39,27 @@ class IssuesController < ApplicationController
     if @issue.update(issue_params)
       redirect_to @issue
     else
-      render 'edit'
+      render :edit
     end
   end
 
   def destroy
-    @issue.destroy
-    redirect_to project_issues_path(@issue.project_id)
+    respond_to do |format|
+      format.js do
+        if @issue.destroy
+          render :js => "window.location = '#{request.referer}'"
+        else
+          render :alert, locals: {alert: @issue.errors.full_messages.join('\n')}
+        end
+      end
+      format.html do
+        if @issue.destroy
+          redirect_to project_issues_path(@issue.project_id)
+        else
+          render :edit
+        end
+      end
+    end
   end
 
   private

@@ -6,7 +6,7 @@ class Project < ActiveRecord::Base
   # gem awesome_nested_set
   acts_as_nested_set
 
-  has_many :issues
+  has_many :issues, dependent: :restrict_with_error
 
   enum status: {archived: 0, active: 1}
 

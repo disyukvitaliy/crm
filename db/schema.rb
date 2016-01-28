@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160126043458) do
+ActiveRecord::Schema.define(version: 20160127123744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,10 +50,14 @@ ActiveRecord::Schema.define(version: 20160126043458) do
     t.text     "descr"
     t.date     "start_date"
     t.date     "due_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "issue_status_id"
+    t.integer  "issue_priority_id"
   end
 
+  add_index "issues", ["issue_priority_id"], name: "index_issues_on_issue_priority_id", using: :btree
+  add_index "issues", ["issue_status_id"], name: "index_issues_on_issue_status_id", using: :btree
   add_index "issues", ["project_id"], name: "index_issues_on_project_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
@@ -80,4 +84,7 @@ ActiveRecord::Schema.define(version: 20160126043458) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "issues", "issue_priorities", name: "fk_issues_on_issue_priority_id", on_delete: :nullify
+  add_foreign_key "issues", "issue_statuses", name: "fk_issues_on_issue_status_id", on_delete: :nullify
+  add_foreign_key "issues", "projects", name: "fk_issues_on_project_id", on_delete: :restrict
 end

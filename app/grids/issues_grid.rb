@@ -15,7 +15,7 @@ class IssuesGrid
   column(:due_date)
   column(:actions, html: true) do |i|
     link_to(:edit, edit_issue_path(i)) + ' ' +
-    link_to(:delete, issue_path(i), method: :delete, data: { confirm: 'Are you sure?' })
+    link_to(:delete, issue_path(i), method: :delete, remote: true, data: { confirm: 'Are you sure?' })
   end
 
 end

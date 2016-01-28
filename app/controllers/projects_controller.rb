@@ -24,23 +24,37 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
-      redirect_to action: 'index'
+      redirect_to action: :index
     else
-      render 'new'
+      render :new
     end
   end
 
   def update
     if @project.update(project_params)
-      redirect_to action: 'index'
+      redirect_to action: :index
     else
-      render 'edit'
+      render :edit
     end
   end
 
   def destroy
-    @project.destroy
-    redirect_to projects_path
+    respond_to do |format|
+      format.js do
+        if @project.destroy
+          render :js => "window.location = '#{request.referer}'"
+        else
+          render :alert, locals: {alert: @project.errors.full_messages.join('\n')}
+        end
+      end
+      format.html do
+        if @project.destroy
+          redirect_to projects_path
+        else
+          render :edit
+        end
+      end
+    end
   end
 
   private
@@ -68,7 +82,7 @@ class ProjectsController < ApplicationController
   # I have spent a day before I found this 2 string
   # I have encountered with strange cache-like behavior between requests
   def reload_left_menu
-    Object.send(:remove_const, 'LeftMenu')
+    Object.send(:remove_const, :LeftMenu) if Object.constants.include?(:LeftMenu)
     load 'left_menu.rb'
   end
 end
