@@ -1,6 +1,5 @@
 class IssuesController < ApplicationController
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
-  before_action :send_project_id_to_left_menu, :only => [:index, :show, :edit]
 
   def all
     @issues_grid = IssuesGrid.new(params[:issues_grid]) do |scope|
