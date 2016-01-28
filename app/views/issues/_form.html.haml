@@ -14,6 +14,6 @@
         =f.collection_select(:issue_status_id, IssueStatus.active.order(:element_order), :id, :title, {selected: @issue.issue_priority_id || IssueStatus.default.first.id, prompt: 'Select status', label_col: 'col-xs-4', control_col: 'col-sm-8'})
     .form-group
       .col-sm-10.col-sm-offset-2
-        =f.submit 'Create', class: 'btn btn-primary', wrapper: {class: 'has-warning'}
+        =f.submit @issue.persisted? ? :Update : :Create, class: 'btn btn-primary', wrapper: {class: 'has-warning'}
         =link_to(:Delete, issue_path(@issue), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }) if @issue.persisted?
-        =button_tag 'Cancel ', class: 'btn btn-default', type: 'reset'
+        =button_tag :Cancel, class: 'btn btn-default', type: :reset

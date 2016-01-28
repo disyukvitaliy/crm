@@ -11,5 +11,5 @@
     = yield f
     .form-group
       .col-sm-10.col-sm-offset-2
-        =f.submit 'Create', class: 'btn btn-primary', wrapper: {class: 'has-warning'}
-        =button_tag 'Cancel', class: 'btn btn-default', type: 'reset'
+        =f.submit @model_object.persisted? ? :Update : :Create, class: 'btn btn-primary', wrapper: {class: 'has-warning'}
+        =button_tag :Cancel, class: 'btn btn-default', type: :reset
