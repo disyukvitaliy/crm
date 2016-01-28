@@ -1,28 +1,14 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+It is my test project. I do it for learning purpose.
 
-Things you may want to cover:
+Now, project consist of many TODO and may be of some not optimised pieсes of code. But it is temporarily.
+After a while, I refactor it.
+Now, I just want to try maximum capability of the Rails.
+I try to use all Rails functionality for the short time.
 
-* Ruby version
+Today, development process has some probllem like a redactoring migration files,
+may be wrong model inheritance approach or sharing common functionality accross similar controllers.
+I have a nice understanding of these flaws. Pleas don't be too strict :)
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
