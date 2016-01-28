@@ -10,5 +10,3 @@ I try to use all Rails functionality for the short time.
 Today, development process has some probllem like a redactoring migration files,
 may be wrong model inheritance approach or sharing common functionality accross similar controllers.
 I have a nice understanding of these flaws. Pleas don't be too strict :)
-
-<tt>rake doc:app</tt>.
