@@ -1,17 +1,16 @@
 class TimeEntriesController < ApplicationController
   before_action :set_time_entry, only: [:show, :edit, :update, :destroy]
-  before_action :send_project_id_to_left_menu, :only => [:index, :show, :edit]
 
-  def all
-    @issues_grid = IssuesGrid.new(params[:issues_grid]) do |scope|
-      scope.page(params[:page]).per(5)
-    end
-    render :index
-  end
+  # def all
+  #   @issues_grid = IssuesGrid.new(params[:issues_grid]) do |scope|
+  #     scope.page(params[:page]).per(5)
+  #   end
+  #   render :index
+  # end
 
   def index
-    @issues_grid = IssuesGrid.new(params[:issues_grid]) do
-      Project.find(params[:project_id]).issues.page(params[:page]).per(5)
+    @time_entries_grid = TimeEntriesGrid.new(params[:time_entries_grid]) do
+      Issue.find(params[:issue_id]).time_entries.page(params[:page]).per(5)
     end
   end
 
@@ -19,14 +18,14 @@ class TimeEntriesController < ApplicationController
   end
 
   def new
-    @issue = Issue.new
+    @issue = TimeEntry.new
   end
 
   def edit
   end
 
   def create
-    @issue = Project.find(params[:project_id]).issues.new(issue_params)
+    @issue = Issue.find(params[:issue_id]).time_entries.new(issue_params)
 
     if @issue.save
       redirect_to @issue
