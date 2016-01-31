@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   get 'issues' => 'issues#all', as: :issues
 
   resources :projects do
-    resources :issues, shallow: true
+    resources :issues, shallow: true do
+      resources :time_entries, shallow: true
+    end
   end
 
   scope 'admin', module: 'admin' do

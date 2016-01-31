@@ -12,7 +12,15 @@
 %p
   %b Due date:
   = @issue.due_date
+%p
+  %b Due date:
+  = @issue.issue_priority.title if @issue.issue_priority_id
+%p
+  %b Due date:
+  = @issue.issue_status.title if @issue.issue_status_id
 
-= link_to 'Edit', edit_issue_path(@issue)
+= link_to :Edit, edit_issue_path(@issue)
 \|
-= link_to 'Back', project_issues_path(@issue.project)
+= link_to :Back, project_issues_path(@issue.project)
+\|
+= link_to 'Log time', new_issue_time_entry_path(@issue)

@@ -1,0 +1,9 @@
+%h3 Time entries
+
+= datagrid_form_for @time_entries_grid, url: request.path
+= datagrid_table(@time_entries_grid, html: {class: 'table table-striped'})
+= paginate @time_entries_grid.assets, theme: 'twitter-bootstrap-3', pagination_class: 'pagination-sm'
+
+= link_to :New, new_issue_time_entry_path(params[:issue_id])
+\|
+= link_to :Back, issue_path(params[:issue_id]) if params[:issue_id]

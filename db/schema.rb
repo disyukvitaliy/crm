@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127123744) do
+ActiveRecord::Schema.define(version: 20160131070242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,7 +84,24 @@ ActiveRecord::Schema.define(version: 20160127123744) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "time_entries", force: :cascade do |t|
+    t.date     "date"
+    t.integer  "amount"
+    t.text     "comment"
+    t.integer  "activity_id"
+    t.integer  "issue_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "time_entries", ["activity_id"], name: "index_time_entries_on_activity_id", using: :btree
+  add_index "time_entries", ["amount"], name: "index_time_entries_on_amount", using: :btree
+  add_index "time_entries", ["date"], name: "index_time_entries_on_date", using: :btree
+  add_index "time_entries", ["issue_id"], name: "index_time_entries_on_issue_id", using: :btree
+
   add_foreign_key "issues", "issue_priorities", name: "fk_issues_on_issue_priority_id", on_delete: :nullify
   add_foreign_key "issues", "issue_statuses", name: "fk_issues_on_issue_status_id", on_delete: :nullify
   add_foreign_key "issues", "projects", name: "fk_issues_on_project_id", on_delete: :restrict
+  add_foreign_key "time_entries", "activities", name: "fk_time_entries_on_activity_id", on_delete: :nullify
+  add_foreign_key "time_entries", "issues", name: "fk_time_entries_on_issue_id", on_delete: :cascade
 end
