@@ -1,10 +1,5 @@
 /*Custom themesation. Used for correcting bootstrap mistakes, and adding extra styles*/
 
-a,
-a:hover,
-a:focus {
-  color: #fff;
-}
 .vresize {
   resize: vertical;
 }

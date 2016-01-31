@@ -13,10 +13,16 @@
   %b Due date:
   = @issue.due_date
 %p
-  %b Due date:
+  %b Estimated time:
+  = @issue.estimated_time_as_float
+%p
+  %b Spent time:
+  = link_to @issue.spent_time_as_float, issue_time_entries_path(@issue)
+%p
+  %b Priority:
   = @issue.issue_priority.title if @issue.issue_priority_id
 %p
-  %b Due date:
+  %b Status:
   = @issue.issue_status.title if @issue.issue_status_id
 
 = link_to :Edit, edit_issue_path(@issue)
