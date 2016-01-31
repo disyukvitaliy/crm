@@ -1,0 +1,7 @@
+%h1 Editing time entry
+
+= render 'form', form_path: time_entry_path(@time_entry)
+
+= link_to 'Show', @time_entry
+\|
+= link_to 'Back', issue_time_entries_path(@time_entry.issue_id)

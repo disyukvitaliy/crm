@@ -1,16 +1,9 @@
 class TimeEntriesController < ApplicationController
   before_action :set_time_entry, only: [:show, :edit, :update, :destroy]
 
-  # def all
-  #   @issues_grid = IssuesGrid.new(params[:issues_grid]) do |scope|
-  #     scope.page(params[:page]).per(5)
-  #   end
-  #   render :index
-  # end
-
   def index
-    @time_entries_grid = TimeEntriesGrid.new(params[:time_entries_grid]) do
-      Issue.find(params[:issue_id]).time_entries.page(params[:page]).per(5)
+    @time_entries_grid = TimeEntriesGrid.new(params[:time_entries_grid]) do |scope|
+      scope.where(issue: params[:issue_id]).page(params[:page]).per(5)
     end
   end
 
@@ -18,25 +11,25 @@ class TimeEntriesController < ApplicationController
   end
 
   def new
-    @issue = TimeEntry.new
+    @time_entry = Issue.find(params[:issue_id]).time_entries.new
   end
 
   def edit
   end
 
   def create
-    @issue = Issue.find(params[:issue_id]).time_entries.new(issue_params)
+    @time_entry = TimeEntry.new(time_entry_params)
 
-    if @issue.save
-      redirect_to @issue
+    if @time_entry.save
+      redirect_to issue_path(@time_entry.issue_id)
     else
       render :new
     end
   end
 
   def update
-    if @issue.update(issue_params)
-      redirect_to @issue
+    if @time_entry.update(time_entry_params)
+      redirect_to issue_time_entries_path(@time_entry.issue_id)
     else
       render :edit
     end
@@ -45,15 +38,15 @@ class TimeEntriesController < ApplicationController
   def destroy
     respond_to do |format|
       format.js do
-        if @issue.destroy
+        if @time_entry.destroy
           render :js => "window.location = '#{request.referer}'"
         else
-          render :alert, locals: {alert: @issue.errors.full_messages.join('\n')}
+          render :alert, locals: {alert: @time_entry.errors.full_messages.join('\n')}
         end
       end
       format.html do
-        if @issue.destroy
-          redirect_to project_issues_path(@issue.project_id)
+        if @time_entry.destroy
+          redirect_to issue_time_entries_path(@time_entry.issue_id)
         else
           render :edit
         end
@@ -67,6 +60,6 @@ class TimeEntriesController < ApplicationController
   end
 
   def time_entry_params
-    params.require(:issue).permit(:subj, :descr, :start_date, :due_date, :issue_priority_id, :issue_status_id)
+    params.require(:time_entry).permit(:date, :issue_id, :activity_id, :amount, :comment)
   end
 end
