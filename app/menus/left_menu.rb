@@ -3,7 +3,7 @@ class LeftMenu
   include Singleton
   attr_accessor :items, :project_id
 
-  # TODO to config. I can't do this before i figure out how to solve cache-like problem.
+  # TODO to config. I can't do this before I figure out how to solve cache-like problem.
   def initialize
     @items = {
       projects: {
