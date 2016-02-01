@@ -30,3 +30,6 @@ puts 'Issues: Several entries has been added.'
 Setting.create({site_name: 'CRM'})
 
 puts 'Setting: Default entry has been added.'
+
+user = CreateAdminService.new.call
+puts "User: Default entry with email: '#{user.email}' and password '#{user.password}' has been added."
