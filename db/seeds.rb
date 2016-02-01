@@ -27,6 +27,5 @@ Project.find(5).update_attribute(:parent_id, 3)
 puts 'Projects: Several entries has been added.'
 puts 'Issues: Several entries has been added.'
 
-Setting.create({site_name: 'CRM'})
-
+CreateSettingsService.new.call
 puts 'Setting: Default entry has been added.'
