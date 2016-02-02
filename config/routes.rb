@@ -6,11 +6,10 @@ Rails.application.routes.draw do
   root 'projects#index'
 
   devise_for :users, controllers: {
-      registrations: 'registrations',
-      sessions: 'sessions',
-      passwords: 'passwords'
+      registrations: 'auth/registrations',
+      sessions: 'auth/sessions',
+      passwords: 'auth/passwords'
   }
-  resources :users
 
   get 'issues' => 'issues#all', as: :issues
 
