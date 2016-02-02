@@ -5,6 +5,13 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'projects#index'
 
+  devise_for :users, controllers: {
+      registrations: 'registrations',
+      sessions: 'sessions',
+      passwords: 'passwords'
+  }
+  resources :users
+
   get 'issues' => 'issues#all', as: :issues
 
   resources :projects do
@@ -43,8 +50,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  devise_for :users
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
