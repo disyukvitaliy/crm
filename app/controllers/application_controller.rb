@@ -14,7 +14,8 @@ class ApplicationController < ActionController::Base
   end
 
   def send_project_id_to_left_menu
-    @project_id = session[:project_id]
+    @serialized_project = session[:project]
+    @project_param = session[:project_param]
   end
 
   def load_settings
