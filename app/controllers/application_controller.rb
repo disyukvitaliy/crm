@@ -3,9 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :authenticate_user!
-  before_action :send_project_id_to_left_menu
-  before_action :load_settings
+  before_action :authenticate_user!, :send_project_id_to_left_menu, :load_settings
 
   protected
 
@@ -16,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def send_project_id_to_left_menu
-    LeftMenu.instance.project_id = session[:project_id]
+    @project_id = session[:project_id]
   end
 
   def load_settings

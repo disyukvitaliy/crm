@@ -1,6 +1,10 @@
-.panel-group{role: "tablist"}
+.list-group
+  =link_to 'Projects', projects_path, class: 'list-group-item'
+  =link_to 'New project', new_project_path, class: 'list-group-item'
 
-  .list-group.panel.panel-default
-    - LeftMenu.instance.prepare_items.items.each_with_index do |(key, element), index|
-      = render 'layouts/left_menu_tab', element: element if element[:type] == :tab
-      = render 'layouts/left_menu_item', element: element if element[:type] == :item
+- if @project_id
+  .list-group
+    =link_to 'Issues', project_issues_path(@project_id), class: 'list-group-item'
+    =link_to 'New issue', new_project_issue_path(@project_id), class: 'list-group-item'
+    =link_to 'News', '#', class: 'list-group-item'
+    =link_to 'Settings', edit_project_path(@project_id), class: 'list-group-item'

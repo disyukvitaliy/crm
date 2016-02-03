@@ -71,20 +71,9 @@ class ProjectsController < ApplicationController
 
   def remember_project_id
     session[:project_id] = @project.to_param
-    reload_left_menu
   end
 
   def forget_project_id
     session.delete(:project_id)
-    reload_left_menu
-  end
-
-  # TODO refactor it
-  # does it looks as something strange? Yes it really is
-  # I have spent a day before I found this 2 string
-  # I have encountered with strange cache-like behavior between requests
-  def reload_left_menu
-    Object.send(:remove_const, :LeftMenu) if Object.constants.include?(:LeftMenu)
-    load 'left_menu.rb'
   end
 end
