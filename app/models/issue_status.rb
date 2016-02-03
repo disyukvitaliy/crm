@@ -19,6 +19,8 @@ class IssueStatus < ActiveRecord::Base
       write_attribute :issue_status, value.to_i
     elsif self.class.issue_statuses.has_key? value
       write_attribute :issue_status, self.class.issue_statuses[value]
+    else
+      write_attribute :issue_status, value
     end
   end
 

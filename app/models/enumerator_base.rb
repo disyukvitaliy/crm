@@ -22,6 +22,8 @@ module EnumeratorBase
           write_attribute :priority, value.to_i
         elsif self.class.priorities.has_key? value
           write_attribute :priority, self.class.priorities[value]
+        else
+          write_attribute :priority, value
         end
       end
 
@@ -31,6 +33,8 @@ module EnumeratorBase
           write_attribute :status, value.to_i
         elsif self.class.statuses.has_key? value
           write_attribute :status, self.class.statuses[value]
+        else
+          write_attribute :status, value
         end
       end
 
