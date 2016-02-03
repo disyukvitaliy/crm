@@ -9,6 +9,12 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  # @see Auth::SessionsController#new
+  def authenticate_user!
+    flash[:from_root_path] = true if request.path == root_path
+    super
+  end
+
   def send_project_id_to_left_menu
     LeftMenu.instance.project_id = session[:project_id]
   end

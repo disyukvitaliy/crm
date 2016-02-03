@@ -63,6 +63,8 @@ group :development, :test do
   gem 'capybara'
 
   gem 'quiet_assets'
+
+  gem 'letter_opener'
 end
 
 group :development do

@@ -1,0 +1,17 @@
+%h2 Change your password
+
+.well
+  = bootstrap_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10') do |f|
+    = f.hidden_field :reset_password_token
+    .form-group
+      .col-sm-10.col-sm-offset-2
+        =f.alert_message 'Please fix the errors below.', class: 'alert alert-danger'
+    = f.password_field :password, placeholder: 'New password', autofocus: true, autocomplete: 'off', help: "#{@minimum_password_length} characters minimum"
+    = f.password_field :password_confirmation, placeholder: 'Confirm new password', autocomplete: 'off'
+    .form-group
+      .col-sm-10.col-sm-offset-2
+        =f.submit 'Change my password', class: 'btn btn-primary', wrapper: {class: 'has-warning'}
+        =button_tag :Cancel, class: 'btn btn-default', type: :reset
+    .form-group
+      .col-sm-10.col-sm-offset-2
+        = render 'devise/shared/links'
