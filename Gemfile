@@ -43,6 +43,8 @@ gem 'datagrid', '~> 1.4'
 
 gem 'acts_as_orderable'
 
+gem 'devise'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -61,6 +63,8 @@ group :development, :test do
   gem 'capybara'
 
   gem 'quiet_assets'
+
+  gem 'letter_opener'
 end
 
 group :development do

@@ -3,10 +3,17 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action :authenticate_user!
   before_action :send_project_id_to_left_menu
   before_action :load_settings
 
   protected
+
+  # @see Auth::SessionsController#new
+  def authenticate_user!
+    flash[:from_root_path] = true if request.path == root_path
+    super
+  end
 
   def send_project_id_to_left_menu
     LeftMenu.instance.project_id = session[:project_id]

@@ -1,7 +1,9 @@
 class ProjectsController < ApplicationController
-  #We need next callbacks order: :set_project, :remember_project_id, parent :send_project_id_to_left_menu
-  prepend_before_action :remember_project_id, :only => [:show, :edit]
-  prepend_before_action :forget_project_id, :only => :index
+
+  # we need next callbacks order: :set_project, :remember_project_id, parent :send_project_id_to_left_menu
+  # also these callbacks must be triggered before parent :send_project_id_to_left_menu
+  prepend_before_action :remember_project_id, only: [:show, :edit]
+  prepend_before_action :forget_project_id, only: :index
   prepend_before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def index

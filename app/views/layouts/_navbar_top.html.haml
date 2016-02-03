@@ -43,6 +43,6 @@
             %span.caret
           %ul.dropdown-menu{:role => 'menu'}
             %li
-              %a{:href => '#'} Details
+              = link_to 'Sign out', destroy_user_session_path, method: :delete
             %li
-              %a{:href => '#'} Logout
+              = link_to :Edit, '#'

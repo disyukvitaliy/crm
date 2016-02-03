@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'projects#index'
 
+  devise_for :users, controllers: {
+      registrations: 'auth/registrations',
+      sessions: 'auth/sessions',
+      passwords: 'auth/passwords'
+  }
+
   get 'issues' => 'issues#all', as: :issues
 
   resources :projects do
