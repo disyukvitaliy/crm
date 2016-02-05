@@ -14,7 +14,7 @@ class TimeEntriesGrid
   column(:activity_id) { |t| t.activity_title }
   column(:issue_id) { |t| t.issue_subj }
   column(:comment)
-  column(:amount) {|t| t.amount_as_float}
+  column(:amount)
   column(:actions, html: true) do |t|
     link_to(:edit, edit_time_entry_path(t)) + ' ' +
     link_to(:delete, time_entry_path(t), method: :delete, remote: true, data: { confirm: 'Are you sure?' })
