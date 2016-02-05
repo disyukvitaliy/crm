@@ -5,9 +5,9 @@
         = f.alert_message 'Please fix the errors below.', error_summary: false, class: 'alert alert-danger'
     = f.text_field :title, placeholder: 'title'
     = f.form_group :priority do
-      = f.check_box :priority, {checked: @model_object.default?, label: 'Default'}
+      = f.check_box :priority, {checked: @model_object.default?, label: 'Default'}, @model_object.class.priorities.key(1), @model_object.class.priorities.key(0)
     = f.form_group :status do
-      = f.check_box :status, {checked: @model_object.active?, label: 'Active'}
+      = f.check_box :status, {checked: @model_object.active?, label: 'Active'}, @model_object.class.statuses.key(1), @model_object.class.statuses.key(0)
     = yield f
     .form-group
       .col-sm-10.col-sm-offset-2

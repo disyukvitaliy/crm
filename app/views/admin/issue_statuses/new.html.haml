@@ -2,6 +2,6 @@
 
 = render layout: 'admin/enumerators/form' do |f|
   = f.form_group :issue_status do
-    = f.check_box :issue_status, {checked: @model_object.closing?, label: 'Issue closed'}
+    = f.check_box :issue_status, {checked: @model_object.closing?, label: 'Issue closed'}, @model_object.class.issue_statuses.key(1), @model_object.class.issue_statuses.key(0)
 
 = link_to 'Back', issue_statuses_path

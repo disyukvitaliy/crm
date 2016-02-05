@@ -1,3 +1,3 @@
 class Activity < ActiveRecord::Base
-  include EnumeratorBase
+  include EnumerableConcern
 end

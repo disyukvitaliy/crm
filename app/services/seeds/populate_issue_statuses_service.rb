@@ -6,9 +6,6 @@ class Seeds::PopulateIssueStatusesService
         is.status = IssueStatus.statuses[:active]
       end
     end
-    IssueStatus.find(2).update_attributes!({
-        issue_status: IssueStatus.issue_statuses[:closing],
-        priority: IssueStatus.priorities[:default]
-    })
+    IssueStatus.find(2).as_closing!.as_default!
   end
 end

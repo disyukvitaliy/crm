@@ -6,6 +6,6 @@ class Seeds::PopulateActivitiesService
         is.status = Activity.statuses[:active]
       end
     end
-    Activity.find(2).update_attribute(:priority, Activity.priorities[:default])
+    Activity.find(2).as_default!
   end
 end

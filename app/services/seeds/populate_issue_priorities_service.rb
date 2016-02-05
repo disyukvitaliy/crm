@@ -6,6 +6,6 @@ class Seeds::PopulateIssuePrioritiesService
         is.status = IssuePriority.statuses[:active]
       end
     end
-    IssuePriority.find(2).update_attribute(:priority, IssuePriority.priorities[:default])
+    IssuePriority.find(2).as_default!
   end
 end

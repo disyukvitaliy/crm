@@ -1,3 +1,3 @@
 class IssuePriority < ActiveRecord::Base
-  include EnumeratorBase
+  include EnumerableConcern
 end
