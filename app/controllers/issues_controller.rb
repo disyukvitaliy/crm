@@ -31,8 +31,4 @@ class IssuesController < ApplicationController
       [:subj, :descr, :start_date, :due_date, :issue_priority_id, :issue_status_id, :estimated_time]
     end
   end
-
-  # def permitted_attributes
-  #   [:subj, :descr, :start_date, :due_date, :issue_priority_id, :issue_status_id, :estimated_time]
-  # end
 end
