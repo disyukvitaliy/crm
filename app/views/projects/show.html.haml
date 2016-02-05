@@ -4,15 +4,15 @@
 
 %p
   %b Subj:
-  = @project.title
+  = @model_object.title
 %p
   %b Descr:
-  = @project.descr
+  = @model_object.descr
 
-= link_to 'Edit', edit_project_path(@project)
+= link_to 'Edit', edit_project_path(@model_object)
 \|
 = link_to 'Back', projects_path
 \|
-= link_to 'Issues', project_issues_path(@project)
+= link_to 'Issues', project_issues_path(@model_object)
 \|
-= link_to 'New issue', new_project_issue_path(@project)
+= link_to 'New issue', new_project_issue_path(@model_object)

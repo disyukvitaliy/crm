@@ -1,5 +1,5 @@
 %h3 Projects
 
-= datagrid_form_for @projects_grid, url: request.path
-= datagrid_table(@projects_grid, html: {class: 'table table-striped'})
-= paginate @projects_grid.assets, theme: 'twitter-bootstrap-3', pagination_class: "pagination-sm"
+= datagrid_form_for @grid_model_object, url: request.path
+= datagrid_table(@grid_model_object, html: {class: 'table table-striped'})
+= paginate @grid_model_object.assets, theme: 'twitter-bootstrap-3', pagination_class: 'pagination-sm'

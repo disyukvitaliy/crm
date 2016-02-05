@@ -24,7 +24,6 @@ class Admin::UsersController < ApplicationController
     if @user.save
       redirect_to action: :index
     else
-      # exit
       render :new
     end
   end

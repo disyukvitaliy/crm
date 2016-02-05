@@ -70,7 +70,7 @@ class Admin::CrudEnumeratorsController < ApplicationController
   # do override in children
   def set_model_class
     @model_class = nil
-    raise NotImplementedError, 'Subclasses must define `set_grid_model_class`.'
+    raise NotImplementedError, 'Subclasses must define `set_model_class`.'
   end
 
   # do override in children
