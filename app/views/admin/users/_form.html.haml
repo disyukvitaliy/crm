@@ -4,7 +4,8 @@
       .col-sm-10.col-sm-offset-2
         = f.alert_message 'Please fix the errors below.', class: 'alert alert-danger'
     = f.text_field :email, placeholder: 'email'
-    = f.select(:status, User.statuses.keys, {prompt: 'Select'})
+    = f.form_group :status do
+      = f.check_box :status, {checked: @user.active?, label: 'Active'}, User.statuses.key(true), User.statuses.key(false)
     = yield f
     .form-group
       .col-sm-10.col-sm-offset-2
