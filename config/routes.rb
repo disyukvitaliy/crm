@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   scope 'admin', module: 'admin' do
     resources :enumerators, only: :index
+    resources :users
     resources :issue_statuses, except: :show do
       member do
         put 'move_up'

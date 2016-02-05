@@ -1,7 +1,7 @@
 %nav.navbar.navbar-default
   .container-fluid
     .navbar-header
-      %button.navbar-toggle.collapsed{'data-target' => '#bs-example-navbar-collapse-1', 'data-toggle' => 'collapse', :type => 'button'}
+      %button.navbar-toggle.collapsed{'data-target' => '#bs-example-navbar-collapse-1', 'data-toggle' => 'collapse', type: 'button'}
         %span.sr-only Toggle navigation
         %span.icon-bar
         %span.icon-bar
@@ -10,11 +10,11 @@
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li
-          %a{:href => '#'}
+          %a{href: '#'}
             My page
             %span.sr-only (current)
         %li.dropdown
-          %a.dropdown-toggle{'aria-expanded' => 'false', 'data-toggle' => 'dropdown', :href => '#', :role => 'button'}
+          %a.dropdown-toggle{'aria-expanded' => 'false', 'data-toggle' => 'dropdown', href: '#', role: 'button'}
             Administration
             %span.caret
           %ul.dropdown-menu{:role => 'menu'}
@@ -31,14 +31,14 @@
               = link_to 'Issue priorities', issue_priorities_path
             %li.divider
             %li
-              %a{:href => '#'} One more separated link
+              = link_to 'Users', users_path
       %form.navbar-form.navbar-left.col-md-3{role: 'search', action: 'https://www.google.ru/search', method: 'GET'}
         .form-group
           %input.form-control{placeholder: 'Search', type: 'text', name: 'q'}/
         %button.btn.btn-default{:type => 'submit'} Find
       %ul.nav.navbar-nav.navbar-right
         %li.dropdown
-          %a.dropdown-toggle{'aria-expanded' => 'false', 'data-toggle' => 'dropdown', :href => '#', :role => 'button'}
+          %a.dropdown-toggle{'aria-expanded' => 'false', 'data-toggle' => 'dropdown', href: '#', role: 'button'}
             Profile
             %span.caret
           %ul.dropdown-menu{:role => 'menu'}

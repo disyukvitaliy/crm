@@ -1,0 +1,5 @@
+%h3 New user
+
+= render layout: 'admin/users/form' do |f|
+  = f.password_field :password, placeholder: 'password'
+  = f.password_field :password_confirmation, placeholder: 'confirm password'
