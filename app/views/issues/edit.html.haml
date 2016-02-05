@@ -1,7 +1,7 @@
-%h1 Editing issue
+%h3 Editing issue
 
-= render 'form', form_path: issue_path(@issue)
+= render 'form', form_path: issue_path(@model_object)
 
-= link_to 'Show', @issue
+= link_to 'Show', @model_object
 \|
-= link_to 'Back', project_issues_path(@issue.project_id)
+= link_to 'Back', project_issues_path(@model_object.project_id)

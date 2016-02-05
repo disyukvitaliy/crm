@@ -1,5 +1,4 @@
 class ProjectsController < ApplicationController
-
   include CrudConcern
 
   append_before_action :remember_project, only: [:show, :edit]

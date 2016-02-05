@@ -10,7 +10,7 @@ module CrudConcern
   def index
     param_name = @grid_model_class.model_name.singular
     @grid_model_object = @grid_model_class.new(params[param_name]) do |scope|
-      scope.page(params[:page]).per(5)
+      grid_scope(scope).page(params[:page]).per(5)
     end
   end
 
@@ -83,9 +83,9 @@ module CrudConcern
   end
 
   # build new model object from params
-  # @param params [Hash]
+  # @param model_params [Hash]
   # @return [ActiveRecord::Base]
-  def build_model_object(params)
+  def build_model_object(model_params)
     @model_class.new(params)
   end
 
@@ -99,6 +99,10 @@ module CrudConcern
   # @return [Array]
   def permitted_attributes
     []
+  end
+
+  def grid_scope(scope)
+    scope
   end
 
   def redirect_after_successful_update
