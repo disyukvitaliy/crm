@@ -8,19 +8,15 @@ class Issue < ActiveRecord::Base
   validates_presence_of :subj, :descr, :estimated_time
   validates :estimated_time, time_similar: true, time_zero: true, allow_blank: true
 
-  before_save { write_attribute(:estimated_time, TimeFormatService.new(estimated_time).to_minutes) }
+  before_save { write_attribute(:estimated_time, TimeFormatService.new(estimated_time).to_float.round(2)) }
 
   # we need to prevent type cast when assigning value to model
   def estimated_time= value
     raw_write_attribute(:estimated_time, value)
   end
 
-  def estimated_time_as_float
-    (estimated_time.to_f / 60).round(2)
-  end
-
   def spent_time_as_float
-    (self.time_entries.sum(:amount).to_f / 60).round(2)
+    self.time_entries.sum(:amount)
   end
 
 end

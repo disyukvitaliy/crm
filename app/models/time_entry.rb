@@ -7,16 +7,10 @@ class TimeEntry < ActiveRecord::Base
   validates :amount, time_similar: true, allow_blank: true
   validates :amount, time_zero: true, allow_blank: true
 
-  before_save { write_attribute(:amount, TimeFormatService.new(amount).to_minutes) }
+  before_save { write_attribute(:amount, TimeFormatService.new(amount).to_float.round(2)) }
 
   # we need to prevent type cast when assigning value to model
   def amount= value
     raw_write_attribute(:amount, value)
   end
-
-  # @return [float] - amount sa float with 2 decimals
-  def amount_as_float
-    (amount.to_f / 60).round(2)
-  end
-
 end

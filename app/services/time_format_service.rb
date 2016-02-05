@@ -26,21 +26,21 @@ class TimeFormatService
   # @return [Integer] - @value converted to minutes
   def calculate_time
     h, m = @value.split(':')
-    h.to_i * 60 + m.to_i
+    h.to_f + m.to_f / 60
   end
 
   # @see #calculate_time
   def calculate_float
-    @value.to_f * 60
+    @value.to_f
   end
 
   # @see #calculate_time
   def calculate_int
-    @value.to_i * 60
+    @value.to_f
   end
 
-  # @return [Integer] - @value converted to minutes
-  def to_minutes
+  # @return [Float] - @value converted to float
+  def to_float
     (calculate_time if time?) || (calculate_float if float?) || (calculate_int if int?) || nil
   end
 
@@ -51,6 +51,6 @@ class TimeFormatService
 
   # @return [Bool] - true if @value is zero
   def zero?
-    to_minutes == 0
+    to_float == 0
   end
 end

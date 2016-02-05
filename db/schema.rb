@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160201045959) do
+ActiveRecord::Schema.define(version: 20160205102910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20160201045959) do
     t.datetime "updated_at",        null: false
     t.integer  "issue_status_id"
     t.integer  "issue_priority_id"
-    t.integer  "estimated_time"
+    t.float    "estimated_time"
   end
 
   add_index "issues", ["estimated_time"], name: "index_issues_on_estimated_time", using: :btree
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20160201045959) do
 
   create_table "time_entries", force: :cascade do |t|
     t.date     "date"
-    t.integer  "amount"
+    t.float    "amount"
     t.text     "comment"
     t.integer  "activity_id"
     t.integer  "issue_id"

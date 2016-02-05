@@ -14,7 +14,7 @@
   = @model_object.due_date
 %p
   %b Estimated time:
-  = @model_object.estimated_time_as_float
+  = @model_object.estimated_time
 %p
   %b Spent time:
   = link_to @model_object.spent_time_as_float, issue_time_entries_path(@model_object)
