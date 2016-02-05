@@ -18,8 +18,10 @@ class ProjectsController < ApplicationController
     @model_object = @model_class.find_by_alias(params[:id])
   end
 
-  def permitted_attributes
-    [:title, :alias, :descr, :parent_id]
+  def prepared_params
+    super do
+      [:title, :alias, :descr, :parent_id]
+    end
   end
 
   def remember_project

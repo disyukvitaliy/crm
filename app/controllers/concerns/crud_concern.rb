@@ -86,19 +86,12 @@ module CrudConcern
   # @param model_params [Hash]
   # @return [ActiveRecord::Base]
   def build_model_object(model_params)
-    @model_class.new(params)
+    @model_class.new(model_params)
   end
 
   # @return [Hash]
   def prepared_params
-    params.require(@model_class.model_name.singular)
-        .permit(permitted_attributes)
-  end
-
-  # see #prepared_params
-  # @return [Array]
-  def permitted_attributes
-    []
+    params.require(@model_class.model_name.singular).permit(yield)
   end
 
   def grid_scope(scope)
