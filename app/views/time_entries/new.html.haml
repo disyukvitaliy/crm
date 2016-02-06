@@ -1,5 +1,8 @@
 %h1 New time entry
 
-= render 'form', form_path: issue_time_entries_path
+- content_for :form_url do
+  = issue_time_entries_path(params[:issue_id])
+
+= render 'form'
 
 = link_to 'Back', issue_time_entries_path

@@ -4,8 +4,8 @@
   .form-group
     .col-sm-6
       = f.text_field :start_date, placeholder: 'Start Date', label_col: 'col-xs-4', control_col: 'col-sm-8', 'data-provide' => 'datepicker', 'data-date-format' => 'yyyy-mm-dd'
-      = f.collection_select(:issue_priority_id, IssuePriority.active.order(:element_order), :id, :title, {selected: @model_object.issue_priority_id || IssuePriority.default.first.id, prompt: 'Select priority', label_col: 'col-xs-4', control_col: 'col-sm-8'})
+      = f.collection_select(:issue_priority_id, IssuePriority.active.order(:element_order), :id, :title, {selected: @model_object.issue_priority_id || IssuePriority.order(priority: :desc).first.id, prompt: 'Select priority', label_col: 'col-xs-4', control_col: 'col-sm-8'})
       = f.text_field :estimated_time, placeholder: 'Estimated time', label_col: 'col-xs-4', control_col: 'col-sm-8'
     .col-sm-6
       = f.text_field :due_date, placeholder: 'Due Date', label_col: 'col-xs-4', control_col: 'col-sm-8', 'data-provide' => 'datepicker', 'data-date-format' => 'yyyy-mm-dd'
-      = f.collection_select(:issue_status_id, IssueStatus.active.order(:element_order), :id, :title, {selected: @model_object.issue_status_id || IssueStatus.default.first.id, prompt: 'Select status', label_col: 'col-xs-4', control_col: 'col-sm-8'})
+      = f.collection_select(:issue_status_id, IssueStatus.active.order(:element_order), :id, :title, {selected: @model_object.issue_status_id || IssueStatus.order(priority: :desc).first.id, prompt: 'Select status', label_col: 'col-xs-4', control_col: 'col-sm-8'})

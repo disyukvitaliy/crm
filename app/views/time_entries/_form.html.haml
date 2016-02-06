@@ -1,16 +1,6 @@
-= render 'crud/notice'
-.well
-  = bootstrap_form_for @model_object, url: form_path, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10' do |f|
-    .form-group
-      .col-sm-10.col-sm-offset-2
-        =f.alert_message 'Please fix the errors below.', error_summary: false, class: 'alert alert-danger'
-    =f.text_field :issue_id, placeholder: 'Issue'
-    =f.text_field :date, placeholder: 'Date', 'data-provide' => 'datepicker', 'data-date-format' => 'yyyy-mm-dd'
-    =f.text_field :amount, placeholder: 'Amount', help: 'You can type something like 2.4 or 2:24 (2.4 equal to 2:24)'
-    =f.text_area :comment, placeholder: 'Comment', class: 'vresize'
-    =f.collection_select(:activity_id, Activity.active.order(:element_order), :id, :title, {selected: @model_object.activity_id || Activity.default.first.id, prompt: 'Select activity'})
-    .form-group
-      .col-sm-10.col-sm-offset-2
-        =f.submit @model_object.persisted? ? :Update : :Create, class: 'btn btn-primary', wrapper: {class: 'has-warning'}
-        =link_to(:Delete, time_entry_path(@model_object), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }) if @model_object.persisted?
-        =button_tag :Cancel, class: 'btn btn-default', type: :reset
+= render layout: 'crud/form' do |f|
+  = f.text_field :issue_id, placeholder: 'Issue'
+  = f.text_field :date, placeholder: 'Date', 'data-provide' => 'datepicker', 'data-date-format' => 'yyyy-mm-dd'
+  = f.text_field :amount, placeholder: 'Amount', help: 'You can type something like 2.4 or 2:24 (2.4 equal to 2:24)'
+  = f.text_area :comment, placeholder: 'Comment', class: 'vresize'
+  = f.collection_select(:activity_id, Activity.active.order(:element_order), :id, :title, {selected: @model_object.activity_id || Activity.order(priority: :desc).first.id, prompt: 'Select activity'})
