@@ -1,5 +1,8 @@
 %h3 New issue
 
-= render 'form', form_path: project_issues_path(params[:project_id])
+- content_for :form_url do
+  = project_issues_path(params[:project_id])
+
+= render 'form'
 
 = link_to 'Back', project_issues_path

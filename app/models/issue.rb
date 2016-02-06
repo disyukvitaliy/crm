@@ -18,5 +18,4 @@ class Issue < ActiveRecord::Base
   def spent_time_as_float
     self.time_entries.sum(:amount)
   end
-
 end

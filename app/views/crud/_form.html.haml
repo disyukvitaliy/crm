@@ -1,0 +1,15 @@
+- if flash[:notice]
+  .alert.alert-success.flash{id: 'flash_notice'}
+    = flash[:notice]
+.well
+  = bootstrap_form_for @model_object, url: yield(:form_url).blank? ? nil : yield(:form_url), layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10' do |f|
+    .form-group
+      .col-sm-10.col-sm-offset-2
+        = f.alert_message 'Please fix the errors below.', class: 'alert alert-danger'
+    = yield f
+    .form-group
+      .col-sm-10.col-sm-offset-2
+        = f.submit @model_object.persisted? ? :Update : :Create, class: 'btn btn-primary', wrapper: {class: 'has-warning'}
+        = link_to(:Delete, polymorphic_path(@model_object), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }) if @model_object.persisted?
+        = button_tag :Cancel, class: 'btn btn-default', type: :reset
+.div
