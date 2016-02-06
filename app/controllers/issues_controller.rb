@@ -8,6 +8,10 @@ class IssuesController < ApplicationController
     render :index
   end
 
+  def index
+    super { Project.find_by_alias(params[:project_id]).issues }
+  end
+
   private
 
   def set_model_class
@@ -18,17 +22,11 @@ class IssuesController < ApplicationController
     @grid_model_class = IssuesGrid
   end
 
-  def grid_scope(scope)
-    Project.find_by_alias(params[:project_id]).issues
-  end
-
   def build_model_object(model_params)
     Project.find_by_alias(params[:project_id]).issues.new(model_params)
   end
 
   def prepared_params
-    super do
-      [:subj, :descr, :start_date, :due_date, :issue_priority_id, :issue_status_id, :estimated_time]
-    end
+    super { [:subj, :descr, :start_date, :due_date, :issue_priority_id, :issue_status_id, :estimated_time] }
   end
 end

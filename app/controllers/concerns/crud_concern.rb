@@ -10,12 +10,12 @@ module CrudConcern
   def index
     param_name = @grid_model_class.model_name.singular
     @grid_model_object = @grid_model_class.new(params[param_name]) do |scope|
-      grid_scope(scope).page(params[:page]).per(5)
+      (block_given? ? yield(scope) : scope).page(params[:page]).per(5)
     end
   end
 
   def new
-    @model_object = @model_class.new
+    @model_object = block_given? ? yield : @model_class.new
   end
 
   def create
@@ -32,11 +32,11 @@ module CrudConcern
   end
 
   def update
-    updated = @model_object.update(prepared_params)
+    @model_object.update(prepared_params)
 
-    yield @model_object, updated if block_given?
+    yield @model_object if block_given?
 
-    if updated
+    if @model_object.errors.empty?
       redirect_after_successful_update
     else
       render :edit
@@ -92,10 +92,6 @@ module CrudConcern
   # @return [Hash]
   def prepared_params
     params.require(@model_class.model_name.singular).permit(yield)
-  end
-
-  def grid_scope(scope)
-    scope
   end
 
   def redirect_after_successful_update

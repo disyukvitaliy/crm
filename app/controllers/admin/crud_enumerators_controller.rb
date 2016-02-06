@@ -44,12 +44,12 @@ class Admin::CrudEnumeratorsController < ApplicationController
   end
 
   def move_up
-    @model_object.move_up(1)
+    @model_object.move_up
     redirect_to action: 'index'
   end
 
   def move_down
-    @model_object.move_down(1)
+    @model_object.move_down
     redirect_to action: 'index'
   end
 

@@ -1,7 +1,7 @@
 %h1 Editing time entry
 
-= render 'form', form_path: time_entry_path(@time_entry)
+= render 'form', form_path: time_entry_path(@model_object)
 
-= link_to 'Show', @time_entry
+= link_to 'Show', @model_object
 \|
-= link_to 'Back', issue_time_entries_path(@time_entry.issue_id)
+= link_to 'Back', issue_time_entries_path(@model_object.issue_id)
