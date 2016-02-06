@@ -17,7 +17,7 @@ class IssueStatusesGrid
   end
   column(:actions, html: true) do |s|
     link_to(:edit, edit_issue_status_path(s)) + ' ' +
-    link_to(:delete, issue_status_path(s), method: :delete, data: { confirm: 'Are you sure?' }) + ' ' +
+    link_to(:delete, issue_status_path(s), method: :delete, remote: true, data: { confirm: 'Are you sure?' }) + ' ' +
     link_to(:default, set_default_issue_status_path(s), method: :put) + ' ' +
     link_to(:closing, set_closing_issue_status_path(s), method: :put)
   end

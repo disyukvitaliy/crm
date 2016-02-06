@@ -1,3 +1,4 @@
+# TODO make it independent from CrudConcern
 module EnumerableControllerConcern
   extend ActiveSupport::Concern
 
