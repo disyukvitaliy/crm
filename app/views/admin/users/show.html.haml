@@ -2,11 +2,11 @@
 
 %p
   %b Email:
-  = @user.email
+  = @model_object.email
 %p
   %b Status:
-  = @user.status
+  = @model_object.status
 
-= link_to 'Edit', edit_user_path(@user)
+= link_to 'Edit', edit_user_path(@model_object)
 \|
 = link_to 'Back', users_path

@@ -4,6 +4,8 @@
   .form-group
     %a.col-sm-10.col-sm-offset-2{'data-toggle' => 'collapse', href: '#collapseOne'}
       Change password
-  #collapseOne.panel-collapse.collapse{class: UserHelper.password_errors(@user) ? 'in': ''}
+  #collapseOne.panel-collapse.collapse{class: UserHelper.password_errors(@model_object) ? 'in': ''}
     = f.password_field :password, placeholder: 'password'
     = f.password_field :password_confirmation, placeholder: 'confirm password'
+
+= link_to 'Back', users_path

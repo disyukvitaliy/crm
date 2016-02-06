@@ -1,14 +1,15 @@
+= render 'crud/notice'
 .well
-  = bootstrap_form_for @user, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10' do |f|
+  = bootstrap_form_for @model_object, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10' do |f|
     .form-group
       .col-sm-10.col-sm-offset-2
         = f.alert_message 'Please fix the errors below.', class: 'alert alert-danger'
     = f.text_field :email, placeholder: 'email'
     = f.form_group :status do
-      = f.check_box :status, {checked: @user.active?, label: 'Active'}, User.statuses.key(true), User.statuses.key(false)
+      = f.check_box :status, {checked: @model_object.active?, label: 'Active'}, User.statuses.key(true), User.statuses.key(false)
     = yield f
     .form-group
       .col-sm-10.col-sm-offset-2
-        = f.submit @user.persisted? ? :Update : :Create, class: 'btn btn-primary', wrapper: {class: 'has-warning'}
-        = link_to(:Delete, user_path(@user), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }) if @user.persisted?
+        = f.submit @model_object.persisted? ? :Update : :Create, class: 'btn btn-primary', wrapper: {class: 'has-warning'}
+        = link_to(:Delete, user_path(@model_object), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }) if @model_object.persisted?
         = button_tag :Cancel, class: 'btn btn-default', type: :reset
