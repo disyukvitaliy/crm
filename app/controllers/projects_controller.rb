@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
     @grid_model_class = ProjectsGrid
   end
 
-  def set_model
+  def set_model_object
     @model_object = @model_class.find_by_alias(params[:id])
   end
 

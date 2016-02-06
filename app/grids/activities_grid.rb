@@ -16,7 +16,7 @@ class ActivitiesGrid
   end
   column(:actions, html: true) do |a|
     link_to(:edit, edit_activity_path(a)) + ' ' +
-    link_to(:delete, activity_path(a), method: :delete, data: { confirm: 'Are you sure?' }) + ' ' +
+    link_to(:delete, activity_path(a), method: :delete, remote: true, data: { confirm: 'Are you sure?' }) + ' ' +
     link_to(:default, set_default_activity_path(a), method: :put)
   end
 

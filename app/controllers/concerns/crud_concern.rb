@@ -4,7 +4,7 @@ module CrudConcern
   included do
     before_action :set_model_class
     before_action :set_grid_model_class, only: :index
-    before_action :set_model, only: [:show, :edit, :update, :destroy]
+    before_action :set_model_object, only: [:show, :edit, :update, :destroy]
   end
 
   def index
@@ -78,7 +78,7 @@ module CrudConcern
     raise NotImplementedError, 'Subclasses must define `set_grid_model_class`.'
   end
 
-  def set_model
+  def set_model_object
     @model_object = @model_class.find(params[:id])
   end
 

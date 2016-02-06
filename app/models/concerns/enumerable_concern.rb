@@ -1,4 +1,3 @@
-# Enumerable class has already reserved
 module EnumerableConcern
   extend ActiveSupport::Concern
 

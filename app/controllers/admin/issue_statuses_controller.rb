@@ -6,7 +6,7 @@ class Admin::IssueStatusesController < Admin::CrudEnumeratorsController
   #   [:edit, :update, :destroy, :move_up, :move_down, :set_default]
   # end
   #
-  # before_action :set_model, only: set_model_only
+  # before_action :set_model_object, only: set_model_only
   #
   # There is possibility to override set_model_only in children [:new_action] + super
   # However it looks ugly, as self.set_model_only must be placed before filters
