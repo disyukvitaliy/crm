@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160207023811) do
+ActiveRecord::Schema.define(version: 20160207043525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,12 +55,14 @@ ActiveRecord::Schema.define(version: 20160207023811) do
     t.integer  "issue_status_id"
     t.integer  "issue_priority_id"
     t.float    "estimated_time"
+    t.integer  "user_id"
   end
 
   add_index "issues", ["estimated_time"], name: "index_issues_on_estimated_time", using: :btree
   add_index "issues", ["issue_priority_id"], name: "index_issues_on_issue_priority_id", using: :btree
   add_index "issues", ["issue_status_id"], name: "index_issues_on_issue_status_id", using: :btree
   add_index "issues", ["project_id"], name: "index_issues_on_project_id", using: :btree
+  add_index "issues", ["user_id"], name: "index_issues_on_user_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.text     "title",                            null: false
@@ -73,12 +75,14 @@ ActiveRecord::Schema.define(version: 20160207023811) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "slug",                             null: false
+    t.integer  "user_id"
   end
 
   add_index "projects", ["lft"], name: "index_projects_on_lft", using: :btree
   add_index "projects", ["parent_id"], name: "index_projects_on_parent_id", using: :btree
   add_index "projects", ["rgt"], name: "index_projects_on_rgt", using: :btree
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
+  add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
   create_table "settings", force: :cascade do |t|
     t.string   "site_name"
@@ -95,12 +99,14 @@ ActiveRecord::Schema.define(version: 20160207023811) do
     t.integer  "issue_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
   end
 
   add_index "time_entries", ["activity_id"], name: "index_time_entries_on_activity_id", using: :btree
   add_index "time_entries", ["amount"], name: "index_time_entries_on_amount", using: :btree
   add_index "time_entries", ["date"], name: "index_time_entries_on_date", using: :btree
   add_index "time_entries", ["issue_id"], name: "index_time_entries_on_issue_id", using: :btree
+  add_index "time_entries", ["user_id"], name: "index_time_entries_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -120,6 +126,9 @@ ActiveRecord::Schema.define(version: 20160207023811) do
   add_foreign_key "issues", "issue_priorities", name: "fk_issues_on_issue_priority_id", on_delete: :nullify
   add_foreign_key "issues", "issue_statuses", name: "fk_issues_on_issue_status_id", on_delete: :nullify
   add_foreign_key "issues", "projects", name: "fk_issues_on_project_id", on_delete: :restrict
+  add_foreign_key "issues", "users", name: "fk_issues_on_user_id", on_delete: :nullify
+  add_foreign_key "projects", "users", name: "fk_projects_on_user_id", on_delete: :nullify
   add_foreign_key "time_entries", "activities", name: "fk_time_entries_on_activity_id", on_delete: :nullify
   add_foreign_key "time_entries", "issues", name: "fk_time_entries_on_issue_id", on_delete: :cascade
+  add_foreign_key "time_entries", "users", name: "fk_time_entries_on_user_id", on_delete: :nullify
 end

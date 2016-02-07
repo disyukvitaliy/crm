@@ -2,8 +2,9 @@ class TimeEntry < ActiveRecord::Base
 
   belongs_to :activity
   belongs_to :issue
+  belongs_to :user
 
-  validates_presence_of :issue_id, :activity_id, :date, :amount
+  validates_presence_of :issue_id, :activity_id, :date, :amount, :user_id, :issue_id
   validates :amount, time_similar: true, allow_blank: true
   validates :amount, time_zero: true, allow_blank: true
 

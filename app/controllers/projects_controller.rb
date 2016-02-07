@@ -4,6 +4,10 @@ class ProjectsController < ApplicationController
   append_before_action :remember_project, only: [:show, :edit]
   append_before_action :forget_project, only: [:index, :new]
 
+  def create
+    super { |project| project.update_attributes({user_id: current_user.id}) }
+  end
+
   private
 
   def set_model_classes
