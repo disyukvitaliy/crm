@@ -1,36 +1,12 @@
-# Awesome CRM
+== README
 
-Awesome CRM is my test project. I do it for learning purpose.
+It is my test project. I do it for learning purpose.
 
-### Done
-  - The knowledge about structure, working flow, base functionality and capabilities of RoR framework
-  - Understanding ruby and metaprogramming
-  - Using various gems for extension base functionality
-  - Extensive refactoring with using concerns, services, helpers, gems, partials and views inheritance
-  - Working with relations, migrations, seeds and resource-based routing
-  - Database design (PostgreSQL)
-  - Using devise for authorisation
-  - Writing readable and understandable code
-  - Documenting code with YARD
-  - Testing code with RSpec, Capybara
-  - Writing views with Haml
-  - Using Bootstrap Superhero Theme
-  - Working with Git, branches, merges
-  - Work on the Ubuntu operating system
-### To do
-  - Setting user permissions and roles using pundit gem configurable via admin part
-  - Upgrade tests. Make them smarter
-  - REST API for retrieving data from system. Make gem for this
-  - Use Redis
-  - Something else to improve skills
+Now, project consist of many TODO and may be of some not optimised pieсes of code. But it is temporarily.
+After a while, I refactor it.
+Now, I just want to try maximum capability of the Rails.
+I try to use all Rails functionality for the short time.
 
-### Installation is pretty simple
-
-```sh
-$ git clone https://github.com/disyukvitaliy/crm.git
-$ bundle
-$ rake db:create db:migrate db:seed
-$ rails s
-```
-
-Note database.yml is under .gitignore file. Make sure you have added it before launch.
+Today, development process has some probllem like a redactoring migration files,
+may be wrong model inheritance approach or sharing common functionality accross similar controllers.
+I have a nice understanding of these flaws. Pleas don't be too strict :)
