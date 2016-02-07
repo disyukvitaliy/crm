@@ -1,15 +1,12 @@
 class IssuesController < ApplicationController
   include CrudConcern
 
-  def all
-    @issues_grid = IssuesGrid.new(params[:issues_grid]) do |scope|
-      scope.page(params[:page]).per(5)
-    end
-    render :index
-  end
-
   def index
     super { Project.find(params[:project_id]).issues }
+  end
+
+  def create
+    super { |issue| issue.update_attributes({user_id: current_user.id}) }
   end
 
   private

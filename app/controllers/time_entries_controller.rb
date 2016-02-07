@@ -9,6 +9,10 @@ class TimeEntriesController < ApplicationController
     super { Issue.find(params[:issue_id]).time_entries.new }
   end
 
+  def create
+    super { |time_entry| time_entry.update_attributes({user_id: current_user.id}) }
+  end
+
   private
 
   def set_model_classes

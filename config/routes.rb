@@ -11,8 +11,6 @@ Rails.application.routes.draw do
       passwords: 'auth/passwords'
   }
 
-  get 'issues' => 'issues#all', as: :issues
-
   resources :projects do
     resources :issues, shallow: true do
       resources :time_entries, shallow: true
