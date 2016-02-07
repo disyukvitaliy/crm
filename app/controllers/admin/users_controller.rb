@@ -9,12 +9,8 @@ class Admin::UsersController < ApplicationController
 
   private
 
-  def set_model_class
-    @model_class = User
-  end
-
-  def set_grid_model_class
-    @grid_model_class = UsersGrid
+  def set_model_classes
+    {model_class: User, grid_model_class: UsersGrid}
   end
 
   def prepared_params

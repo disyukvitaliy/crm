@@ -6,16 +6,8 @@ class ProjectsController < ApplicationController
 
   private
 
-  def set_model_class
-    @model_class = Project
-  end
-
-  def set_grid_model_class
-    @grid_model_class = ProjectsGrid
-  end
-
-  def set_model_object
-    @model_object = @model_class.find(params[:id])
+  def set_model_classes
+    {model_class: Project, grid_model_class: ProjectsGrid}
   end
 
   def prepared_params

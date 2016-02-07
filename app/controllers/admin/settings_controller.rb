@@ -3,8 +3,8 @@ class Admin::SettingsController < ApplicationController
 
   private
 
-  def set_model_class
-    @model_class = Setting
+  def set_model_classes
+    {model_class: Setting}
   end
 
   def prepared_params

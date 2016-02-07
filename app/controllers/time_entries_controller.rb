@@ -11,12 +11,8 @@ class TimeEntriesController < ApplicationController
 
   private
 
-  def set_model_class
-    @model_class = TimeEntry
-  end
-
-  def set_grid_model_class
-    @grid_model_class = TimeEntriesGrid
+  def set_model_classes
+    {model_class: TimeEntry, grid_model_class: TimeEntriesGrid}
   end
 
   def prepared_params

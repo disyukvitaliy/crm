@@ -2,8 +2,7 @@ module CrudConcern
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_model_class
-    before_action :set_grid_model_class, only: :index
+    before_action :init_model_classes
     before_action :set_model_object, only: [:show, :edit, :update, :destroy]
   end
 
@@ -64,18 +63,26 @@ module CrudConcern
 
   private
 
-  # do override in children
-  # == Example
-  #   @model_class = Project
-  def set_model_class
-    raise NotImplementedError, 'Subclasses must define `set_model_class`.'
+  def init_model_classes
+    @model_class = set_model_class
+    @grid_model_class = set_grid_model_class
   end
 
   # do override in children
   # == Example
-  #   @grid_model_class = ProjectsGrid
+  #   {model_class: Project, grid_model_class: ProjectsGrid}
+  def set_model_classes
+    raise NotImplementedError, 'Subclasses must define `set_model_classes`.'
+  end
+
+  # @return [ActiveRecord::Base]
+  def set_model_class
+    set_model_classes[:model_class]
+  end
+
+  # @return [Datagrid]
   def set_grid_model_class
-    raise NotImplementedError, 'Subclasses must define `set_grid_model_class`.'
+    set_model_classes[:grid_model_class]
   end
 
   def set_model_object

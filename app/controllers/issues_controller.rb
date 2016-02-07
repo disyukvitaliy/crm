@@ -14,12 +14,8 @@ class IssuesController < ApplicationController
 
   private
 
-  def set_model_class
-    @model_class = Issue
-  end
-
-  def set_grid_model_class
-    @grid_model_class = IssuesGrid
+  def set_model_classes
+    {model_class: Issue, grid_model_class: IssuesGrid}
   end
 
   def build_model_object(model_params)

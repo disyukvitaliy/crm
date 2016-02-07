@@ -6,12 +6,8 @@ class Admin::ActivitiesController < ApplicationController
 
   private
 
-  def set_model_class
-    @model_class = Activity
-  end
-
-  def set_grid_model_class
-    @grid_model_class = ActivitiesGrid
+  def set_model_classes
+    {model_class: Activity, grid_model_class: ActivitiesGrid}
   end
 
   def prepared_params

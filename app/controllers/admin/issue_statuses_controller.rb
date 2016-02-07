@@ -11,12 +11,8 @@ class Admin::IssueStatusesController < ApplicationController
 
   private
 
-  def set_model_class
-    @model_class = IssueStatus
-  end
-
-  def set_grid_model_class
-    @grid_model_class = IssueStatusesGrid
+  def set_model_classes
+    {model_class: IssueStatus, grid_model_class: IssueStatusesGrid}
   end
 
   def prepared_params

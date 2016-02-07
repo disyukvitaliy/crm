@@ -6,12 +6,8 @@ class Admin::IssuePrioritiesController < ApplicationController
 
   private
 
-  def set_model_class
-    @model_class = IssuePriority
-  end
-
-  def set_grid_model_class
-    @grid_model_class = IssuePrioritiesGrid
+  def set_model_classes
+    {model_class: IssuePriority, grid_model_class: IssuePrioritiesGrid}
   end
 
   def prepared_params
