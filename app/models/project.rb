@@ -1,4 +1,8 @@
 class Project < ActiveRecord::Base
+  include FriendlyId
+
+  # gem friendly_id
+  friendly_id :title, use: [:slugged, :finders]
 
   # gem strip_attributes
   strip_attributes
@@ -11,18 +15,5 @@ class Project < ActiveRecord::Base
   enum status: {archived: 0, active: 1}
 
   validates :title, uniqueness: true, presence: true
-  validates :alias, uniqueness: true
-
-  before_validation :transliterate_alias
-
-  def to_param
-    self.alias
-  end
-
-  private
-
-  def transliterate_alias
-    self.alias = Translit.convert(self.title, :english) if self.alias.blank? & self.title?
-  end
 
 end

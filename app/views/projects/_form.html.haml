@@ -1,5 +1,4 @@
 = render layout: 'crud/form' do |f|
   = f.text_field :title, placeholder: 'title'
-  = f.text_field :alias, placeholder: 'alias', help: 'You can leave this field blank. This case it will filled automatically.'
   = f.text_area :descr, placeholder: 'description', class: 'vresize'
   = f.collection_select(:parent_id, Project.all, :id, :title, {prompt: 'Select'})

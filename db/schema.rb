@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160205102910) do
+ActiveRecord::Schema.define(version: 20160207023811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 20160205102910) do
 
   create_table "projects", force: :cascade do |t|
     t.text     "title",                            null: false
-    t.text     "alias",                            null: false
     t.text     "descr"
     t.integer  "status",     limit: 2, default: 1
     t.integer  "parent_id"
@@ -73,11 +72,13 @@ ActiveRecord::Schema.define(version: 20160205102910) do
     t.integer  "depth",                default: 0, null: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.string   "slug",                             null: false
   end
 
   add_index "projects", ["lft"], name: "index_projects_on_lft", using: :btree
   add_index "projects", ["parent_id"], name: "index_projects_on_parent_id", using: :btree
   add_index "projects", ["rgt"], name: "index_projects_on_rgt", using: :btree
+  add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
 
   create_table "settings", force: :cascade do |t|
     t.string   "site_name"

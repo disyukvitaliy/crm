@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
   end
 
   def set_model_object
-    @model_object = @model_class.find_by_alias(params[:id])
+    @model_object = @model_class.find(params[:id])
   end
 
   def prepared_params

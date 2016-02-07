@@ -9,7 +9,7 @@ class IssuesController < ApplicationController
   end
 
   def index
-    super { Project.find_by_alias(params[:project_id]).issues }
+    super { Project.find(params[:project_id]).issues }
   end
 
   private
@@ -23,7 +23,7 @@ class IssuesController < ApplicationController
   end
 
   def build_model_object(model_params)
-    Project.find_by_alias(params[:project_id]).issues.new(model_params)
+    Project.find(params[:project_id]).issues.new(model_params)
   end
 
   def prepared_params
