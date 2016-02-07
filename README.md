@@ -17,6 +17,7 @@ Awesome CRM is my test project. I do it for learning purpose.
   - Using Bootstrap Superhero Theme
   - Working with Git, branches, merges
   - Work on the Ubuntu operating system
+  
 ### To do
   - Setting user permissions and roles using pundit gem configurable via admin part
   - Upgrade tests. Make them smarter
