@@ -18,4 +18,8 @@ class TimeEntriesController < ApplicationController
   def prepared_params
     super { [:date, :issue_id, :activity_id, :amount, :comment] }
   end
+
+  def redirect_after_successful_html_destroy(time_entry)
+    redirect_to issue_time_entries_path time_entry.issue
+  end
 end

@@ -53,7 +53,7 @@ module CrudConcern
       end
       format.html do
         if @model_object.destroy
-          redirect_after_successful_html_destroy
+          redirect_after_successful_html_destroy @model_object
         else
           render :edit
         end
@@ -109,7 +109,8 @@ module CrudConcern
     redirect_to({action: :edit, id: @model_object.to_param}, notice: 'Has successfully created')
   end
 
-  def redirect_after_successful_html_destroy
+  # @param model_object [ActiveRecord::Base]
+  def redirect_after_successful_html_destroy(model_object = nil)
     redirect_to action: :index
   end
 

@@ -25,4 +25,8 @@ class IssuesController < ApplicationController
   def prepared_params
     super { [:subj, :descr, :start_date, :due_date, :issue_priority_id, :issue_status_id, :estimated_time] }
   end
+
+  def redirect_after_successful_html_destroy(issue)
+    redirect_to project_issues_path issue.project
+  end
 end
