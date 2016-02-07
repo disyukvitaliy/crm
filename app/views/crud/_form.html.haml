@@ -10,6 +10,5 @@
     .form-group
       .col-sm-10.col-sm-offset-2
         = f.submit @model_object.persisted? ? :Update : :Create, class: 'btn btn-primary', wrapper: {class: 'has-warning'}
-        = link_to(:Delete, polymorphic_path(@model_object), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }) if @model_object.persisted?
+        = content_for?(:delete) ? yield(:delete) : link_to(:Delete, polymorphic_path(@model_object), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }) if @model_object.persisted?
         = button_tag :Cancel, class: 'btn btn-default', type: :reset
-.div

@@ -1,13 +1,8 @@
-%h3 Edit Project
+%h3 Edit Settings
 
-.well
-  = bootstrap_form_for @settings, layout: :horizontal, label_col: 'col-sm-2', control_col: 'col-sm-10' do |f|
-    .form-group
-      .col-sm-10.col-sm-offset-2
-        =f.alert_message 'Please fix the errors below.', error_summary: false, class: 'alert alert-danger'
-    =f.text_field :site_name, placeholder: 'title'
-    =f.text_field :host_name, placeholder: 'alias'
-    .form-group
-      .col-sm-10.col-sm-offset-2
-        =f.submit 'Save', class: 'btn btn-primary', wrapper: {class: 'has-warning'}
-        =button_tag 'Cancel', class: 'btn btn-default', type: 'reset'
+- content_for :delete do
+  - '<span></span>'
+
+= render layout: 'crud/form' do |f|
+  =f.text_field :site_name, placeholder: 'Site name'
+  =f.text_field :host_name, placeholder: 'Host name'

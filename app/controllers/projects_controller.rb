@@ -19,9 +19,7 @@ class ProjectsController < ApplicationController
   end
 
   def prepared_params
-    super do
-      [:title, :alias, :descr, :parent_id]
-    end
+    super { [:title, :alias, :descr, :parent_id] }
   end
 
   def remember_project

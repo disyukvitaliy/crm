@@ -44,11 +44,7 @@ Rails.application.routes.draw do
         put 'set_default'
       end
     end
-    resources :settings, only: :update do
-      collection do
-          get 'edit'
-      end
-    end
+    resources :settings, only: [:edit, :update]
   end
 
   # Example of regular route:
