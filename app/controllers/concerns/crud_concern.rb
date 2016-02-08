@@ -17,6 +17,10 @@ module CrudConcern
     @model_object = block_given? ? yield : @model_class.new
   end
 
+  def edit
+    authorize @model_object
+  end
+
   def create
     @model_object = build_model_object(prepared_params)
     @model_object.save
