@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160207043525) do
+ActiveRecord::Schema.define(version: 20160208045057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,15 @@ ActiveRecord::Schema.define(version: 20160207043525) do
   add_index "issues", ["project_id"], name: "index_issues_on_project_id", using: :btree
   add_index "issues", ["user_id"], name: "index_issues_on_user_id", using: :btree
 
+  create_table "permissions", force: :cascade do |t|
+    t.string   "model"
+    t.string   "action"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "permissions", ["model", "action"], name: "index_permissions_on_model_and_action", using: :btree
+
   create_table "projects", force: :cascade do |t|
     t.text     "title",                            null: false
     t.text     "descr"
@@ -83,6 +92,22 @@ ActiveRecord::Schema.define(version: 20160207043525) do
   add_index "projects", ["rgt"], name: "index_projects_on_rgt", using: :btree
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
+
+  create_table "role_permissions", force: :cascade do |t|
+    t.integer  "role_id"
+    t.integer  "permission_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "role_permissions", ["permission_id"], name: "index_role_permissions_on_permission_id", using: :btree
+  add_index "role_permissions", ["role_id"], name: "index_role_permissions_on_role_id", using: :btree
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "settings", force: :cascade do |t|
     t.string   "site_name"
@@ -117,10 +142,12 @@ ActiveRecord::Schema.define(version: 20160207043525) do
     t.boolean  "status",                 default: false, null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.integer  "role_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
   add_index "users", ["status"], name: "index_users_on_status", using: :btree
 
   add_foreign_key "issues", "issue_priorities", name: "fk_issues_on_issue_priority_id", on_delete: :nullify
@@ -128,7 +155,10 @@ ActiveRecord::Schema.define(version: 20160207043525) do
   add_foreign_key "issues", "projects", name: "fk_issues_on_project_id", on_delete: :restrict
   add_foreign_key "issues", "users", name: "fk_issues_on_user_id", on_delete: :nullify
   add_foreign_key "projects", "users", name: "fk_projects_on_user_id", on_delete: :nullify
+  add_foreign_key "role_permissions", "permissions", name: "fk_role_permissions_on_permission_id", on_delete: :cascade
+  add_foreign_key "role_permissions", "roles", name: "fk_role_permissions_on_role_id", on_delete: :cascade
   add_foreign_key "time_entries", "activities", name: "fk_time_entries_on_activity_id", on_delete: :nullify
   add_foreign_key "time_entries", "issues", name: "fk_time_entries_on_issue_id", on_delete: :cascade
   add_foreign_key "time_entries", "users", name: "fk_time_entries_on_user_id", on_delete: :nullify
+  add_foreign_key "users", "roles", name: "fk_users_on_role_id", on_delete: :nullify
 end
