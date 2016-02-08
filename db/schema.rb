@@ -93,11 +93,9 @@ ActiveRecord::Schema.define(version: 20160208045057) do
   add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
-  create_table "role_permissions", force: :cascade do |t|
-    t.integer  "role_id"
-    t.integer  "permission_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+  create_table "role_permissions", id: false, force: :cascade do |t|
+    t.integer "role_id"
+    t.integer "permission_id"
   end
 
   add_index "role_permissions", ["permission_id"], name: "index_role_permissions_on_permission_id", using: :btree

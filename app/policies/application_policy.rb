@@ -27,6 +27,7 @@ class ApplicationPolicy
   end
 
   def edit?
+    # Permission.where('model = ? AND action = ?', record.class.name, :edit).first ? true : false
     update?
   end
 
