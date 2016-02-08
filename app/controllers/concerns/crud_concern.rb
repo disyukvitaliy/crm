@@ -18,7 +18,7 @@ module CrudConcern
   end
 
   def edit
-    authorize @model_object
+    # authorize @model_object
   end
 
   def create
