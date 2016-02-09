@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
 
   enum status: {active: true, inactive: false}
 
+  belongs_to :role
+
+  validates_presence_of :role_id
+
   def active_for_authentication?
     super && active?
   end
