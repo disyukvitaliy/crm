@@ -1,2 +1,3 @@
 = render layout: 'crud/form' do |f|
   = f.text_field :name, placeholder: 'Name'
+  = f.collection_select(:permissions, Permission.order(:model, :action).all, :id, Proc.new {|p| "#{p.model}|#{p.action}"}, {include_hidden: false, selected: @selected_permission_ids}, {class: 'bootstrap-multiselect', multiple: 'multiple', name: "#{f.object_name}[permissions][]", style: 'display: none;'})
