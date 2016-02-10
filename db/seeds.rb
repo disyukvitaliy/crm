@@ -1,8 +1,8 @@
 
-Seeds::PopulateRolesService.new.call
-puts 'roles table has been populated'
 Seeds::PopulatePermissionsService.new.call
 puts 'permissions table has been populated'
+Seeds::PopulateRolesService.new.call
+puts 'roles table has been populated'
 user = Seeds::CreateAdminService.new.call
 puts "users table has been populated with default entry, email: '#{user.email}' and password '#{user.password}'"
 Seeds::CreateSettingsService.new.call

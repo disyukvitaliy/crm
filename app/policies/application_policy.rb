@@ -1,21 +1,20 @@
 class ApplicationPolicy
-  attr_reader :user, :record
+  attr_reader :user, :record, :section
 
-  def initialize(user, record)
-    @user = user
-    @record = record
+  def initialize(user, object)
+    init_vars(user, object)
   end
 
   def index?
-    false
+    can? :index
   end
 
   def show?
-    scope.where(:id => record.id).exists?
+    can? :show
   end
 
   def create?
-    false
+    can? :create
   end
 
   def new?
@@ -23,16 +22,15 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    can? :update
   end
 
   def edit?
-    # Permission.where('model = ? AND action = ?', record.class.name, :edit).first ? true : false
     update?
   end
 
   def destroy?
-    false
+    can? :destroy
   end
 
   def scope
@@ -50,5 +48,28 @@ class ApplicationPolicy
     def resolve
       scope
     end
+  end
+
+  private
+
+  # TODO object.is_a?(ActiveRecord::Base) maybe something else?
+  def init_vars(user, object)
+    @user = user
+    @record = nil
+    @record, @section = [object, object.class.name] if object.is_a?(ActiveRecord::Base)
+    @section = object if object.is_a?(Symbol) || object.is_a?(String)
+    @section ||= object.name
+  end
+
+  # @param action [String,Symbol]
+  # @return [Bool] true if can perform action, false if not
+  def can?(action)
+    find_permission(action) ? true : false
+  end
+
+  # @param action [String,Symbol]
+  # @return [ActiveRecord::Base, nil]
+  def find_permission(action)
+    user.role.permissions.where('section = ? AND action = ?', section, action).first
   end
 end

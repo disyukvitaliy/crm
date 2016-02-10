@@ -3,11 +3,11 @@ class PermissionsGrid
   include Datagrid
 
   scope do
-    Permission.order(:model, :action)
+    Permission
   end
 
   column(:id)
-  column(:model)
+  column(:section)
   column(:action)
   column(:actions, html: true) do |p|
     link_to(:edit, edit_permission_path(p)) + ' ' +

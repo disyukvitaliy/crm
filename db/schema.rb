@@ -65,13 +65,13 @@ ActiveRecord::Schema.define(version: 20160208045057) do
   add_index "issues", ["user_id"], name: "index_issues_on_user_id", using: :btree
 
   create_table "permissions", force: :cascade do |t|
-    t.string   "model"
+    t.string   "section"
     t.string   "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "permissions", ["model", "action"], name: "index_permissions_on_model_and_action", using: :btree
+  add_index "permissions", ["section", "action"], name: "index_permissions_on_section_and_action", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.text     "title",                            null: false

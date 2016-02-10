@@ -8,6 +8,6 @@ class Admin::PermissionsController < ApplicationController
   end
 
   def prepared_params
-    super { [:model, :action] }
+    super { [:section, :action] }
   end
 end

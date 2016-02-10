@@ -8,7 +8,7 @@ class Admin::RolesController < ApplicationController
 
   def edit
     super
-    set_selected_permission_ids(@model_object.permissions.pluck(:id))
+    set_selected_permission_ids(get_model_object.permissions.pluck(:id))
   end
 
   def create

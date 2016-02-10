@@ -4,9 +4,11 @@ class Seeds::PopulatePermissionsService
     Permission.delete_all
     ActiveRecord::Base.descendants.each do |model|
       actions.each do |action|
-        Permission.create({model: model.name, action: action})
+        Permission.create({section: model.name, action: action})
       end
     end
+
+    Permission.create(section: 'Admin', action: 'administrate')
   end
 
   def actions

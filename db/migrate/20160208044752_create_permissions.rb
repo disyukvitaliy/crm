@@ -1,12 +1,12 @@
 class CreatePermissions < ActiveRecord::Migration
   def change
     create_table :permissions do |t|
-      t.string :model
+      t.string :section
       t.string :action
 
       t.timestamps null: false
     end
 
-    add_index :permissions, [:model, :action]
+    add_index :permissions, [:section, :action]
   end
 end
