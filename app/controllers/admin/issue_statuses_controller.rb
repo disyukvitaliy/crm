@@ -2,7 +2,7 @@ class Admin::IssueStatusesController < ApplicationController
   include CrudConcern
   include EnumerableControllerConcern
 
-  before_action :set_model_object, only: [:edit, :update, :destroy, :set_default, :set_closing, :move_up, :move_down]
+  before_action :set_issue_status, only: :set_closing
 
   def set_closing
     IssueStatus.find(params[:id]).as_closing!
@@ -17,5 +17,9 @@ class Admin::IssueStatusesController < ApplicationController
 
   def prepared_params
     super { [:title, :priority, :status, :issue_status] }
+  end
+
+  def set_issue_status
+    set_model_object
   end
 end

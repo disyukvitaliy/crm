@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :registerable, :rememberable, :validatable, :recoverable
+  include UseBasePolicyConcern
 
+  devise :database_authenticatable, :registerable, :rememberable, :validatable, :recoverable
   enum status: {active: true, inactive: false}
 
   belongs_to :role

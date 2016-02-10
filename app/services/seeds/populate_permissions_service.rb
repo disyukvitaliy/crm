@@ -12,6 +12,6 @@ class Seeds::PopulatePermissionsService
   end
 
   def actions
-    [:index, :show, :create, :update, :delete]
+    [:index, :show, :create, :update, :destroy]
   end
 end

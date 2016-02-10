@@ -1,5 +1,6 @@
 class IssueStatus < ActiveRecord::Base
   include EnumerableConcern
+  include UseBasePolicyConcern
 
   # wether it is closed status to the issue?
   enum issue_status: {closing: 1, opening: 0}
