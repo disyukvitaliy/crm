@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   enum status: {active: true, inactive: false}
 
   belongs_to :role
+  has_many :created_projects, class_name: 'Project', foreign_key: 'user_id'
+  has_many :user_projects
+  has_many :accessed_projects, through: :user_projects, source: 'project'
 
   validates_presence_of :role_id
 

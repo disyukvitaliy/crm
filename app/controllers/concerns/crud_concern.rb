@@ -24,6 +24,7 @@ module CrudConcern
 
   def create
     @model_object = build_model_object(prepared_params)
+    update_has_many_relations(@model_object)
     @model_object.save
 
     yield @model_object if block_given?
@@ -36,6 +37,7 @@ module CrudConcern
   end
 
   def update
+    update_has_many_relations(@model_object)
     @model_object.update(prepared_params)
 
     yield @model_object if block_given?
@@ -126,5 +128,28 @@ module CrudConcern
 
   def after_successful_js_destroy
     render js: "window.location = '#{request.referer}'"
+  end
+
+  # @return [Hash] - hash of relations
+  # @example
+  #
+  #   class Project
+  #     has_many :issues
+  #     has_many :users
+  #   end
+  #
+  #   {issues: IssuesHelper, users: UsersHelper}
+  #
+  # Helper module must implement update method
+  def has_many_relations
+    {}
+  end
+
+  # @param model_object [ActiveRecord::Base]
+  def update_has_many_relations(model_object)
+    has_many_relations.each do |relation, helper|
+      raise NotImplementedError, "#{helper} must implement update method" unless helper.respond_to?(:update)
+      helper.update(model_object, params[model_object.model_name.singular][relation] || [])
+    end
   end
 end

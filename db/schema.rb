@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160208045057) do
+ActiveRecord::Schema.define(version: 20160210074848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,14 @@ ActiveRecord::Schema.define(version: 20160208045057) do
   add_index "time_entries", ["issue_id"], name: "index_time_entries_on_issue_id", using: :btree
   add_index "time_entries", ["user_id"], name: "index_time_entries_on_user_id", using: :btree
 
+  create_table "user_projects", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+  end
+
+  add_index "user_projects", ["project_id"], name: "index_user_projects_on_project_id", using: :btree
+  add_index "user_projects", ["user_id"], name: "index_user_projects_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -158,5 +166,7 @@ ActiveRecord::Schema.define(version: 20160208045057) do
   add_foreign_key "time_entries", "activities", name: "fk_time_entries_on_activity_id", on_delete: :nullify
   add_foreign_key "time_entries", "issues", name: "fk_time_entries_on_issue_id", on_delete: :cascade
   add_foreign_key "time_entries", "users", name: "fk_time_entries_on_user_id", on_delete: :nullify
+  add_foreign_key "user_projects", "projects", name: "fk_user_projects_on_project_id", on_delete: :cascade
+  add_foreign_key "user_projects", "users", name: "fk_user_projects_on_user_id", on_delete: :cascade
   add_foreign_key "users", "roles", name: "fk_users_on_role_id", on_delete: :nullify
 end
