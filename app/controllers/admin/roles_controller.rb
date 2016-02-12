@@ -8,10 +8,6 @@ class Admin::RolesController < ApplicationController
   end
 
   def prepared_params
-    super { [:name] }
-  end
-
-  def has_many_relations
-    {permissions: RolePermissionsHelper}
+    super { [:name, {permissions: []}] }
   end
 end

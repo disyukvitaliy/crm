@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   include UseBasePolicyConcern
+  include HasManyUpdaterConcern
+
+  has_many_updater :accessed_projects, Project
 
   devise :database_authenticatable, :registerable, :rememberable, :validatable, :recoverable
   enum status: {active: true, inactive: false}

@@ -1,7 +1,7 @@
 = render layout: 'crud/form' do |f|
   = f.text_field :email, placeholder: 'email'
   = f.collection_select(:role_id, Role.all, :id, :name, {prompt: 'Select role'})
-  = f.collection_select(:accessed_projects, Project.order(:title).all, :id, :title, {include_hidden: false, selected: @model_object.accessed_projects.map(&:id)}, {class: 'bootstrap-multiselect', multiple: 'multiple', style: 'display: none;'})
+  = f.collection_select(:accessed_projects, Project.order(:title).all, :id, :title, {selected: @model_object.accessed_projects.map(&:id)}, {class: 'bootstrap-multiselect', multiple: 'multiple', style: 'display: none;'})
   = f.form_group :status do
     = f.check_box :status, {checked: @model_object.active?, label: 'Active'}, User.statuses.key(true), User.statuses.key(false)
   = yield f

@@ -2,9 +2,11 @@ class Admin::UsersController < ApplicationController
   include CrudConcern
 
   def update
-    super do |model_object|
-      UserHelper.update_passwords model_object
+    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+      params[:user].delete :password
+      params[:user].delete :password_confirmation
     end
+    super
   end
 
   private
@@ -14,10 +16,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def prepared_params
-    super { [:email, :password, :password_confirmation, :status, :role_id] }
-  end
-
-  def has_many_relations
-    {accessed_projects: UserProjectsHelper}
+    super { [:email, :password, :password_confirmation, :status, :role_id, {accessed_projects: []}] }
   end
 end
