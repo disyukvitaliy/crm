@@ -20,7 +20,7 @@ class IssuesController < ApplicationController
   end
 
   def prepared_params
-    super { [:subj, :descr, :start_date, :due_date, :issue_priority_id, :issue_status_id, :estimated_time] }
+    permitted_attributes(get_model_object || Issue)
   end
 
   def redirect_after_successful_html_destroy(issue)
