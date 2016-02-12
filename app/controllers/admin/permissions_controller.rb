@@ -1,4 +1,5 @@
 class Admin::PermissionsController < ApplicationController
+  include AdminControllerConcern
   include CrudConcern
 
   private

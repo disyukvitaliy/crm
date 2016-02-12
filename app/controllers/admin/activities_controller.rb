@@ -1,4 +1,5 @@
 class Admin::ActivitiesController < ApplicationController
+  include AdminControllerConcern
   include CrudConcern
   include EnumerableControllerConcern
 

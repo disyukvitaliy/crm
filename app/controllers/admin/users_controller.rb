@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  include AdminControllerConcern
   include CrudConcern
 
   def update

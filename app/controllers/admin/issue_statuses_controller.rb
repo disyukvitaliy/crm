@@ -1,4 +1,5 @@
 class Admin::IssueStatusesController < ApplicationController
+  include AdminControllerConcern
   include CrudConcern
   include EnumerableControllerConcern
 

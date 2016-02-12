@@ -1,4 +1,5 @@
 class Admin::RolesController < ApplicationController
+  include AdminControllerConcern
   include CrudConcern
 
   private

@@ -1,4 +1,5 @@
 class Admin::SettingsController < ApplicationController
+  include AdminControllerConcern
   include CrudConcern
 
   private

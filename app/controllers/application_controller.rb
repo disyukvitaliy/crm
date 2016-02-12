@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
-  protect_from_forgery with: :exception
 
+  protect_from_forgery with: :exception
   before_action :authenticate_user!, :send_project_id_to_left_menu, :load_settings
 
   protected

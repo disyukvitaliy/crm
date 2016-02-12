@@ -1,4 +1,5 @@
 class Admin::IssuePrioritiesController < ApplicationController
+  include AdminControllerConcern
   include CrudConcern
   include EnumerableControllerConcern
 
