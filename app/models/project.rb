@@ -14,6 +14,7 @@ class Project < ActiveRecord::Base
   has_many :accessed_users, through: :user_projects, source: 'user'
   has_many :user_projects
   has_many :issues, dependent: :restrict_with_error
+  has_many :accessed_issues, class_name: 'Issue', foreign_key: 'project_id'
 
   enum status: {archived: 0, active: 1}
 
