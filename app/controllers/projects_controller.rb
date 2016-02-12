@@ -18,9 +18,13 @@ class ProjectsController < ApplicationController
     super { [:title, :alias, :descr, :parent_id] }
   end
 
+  # the working process is based on the projects.
+  # we must choose some project to have ability like create issues,
+  # view project's news or project wiki.
+  # the left menu only appear when a project is selected
   def remember_project
-    session[:project_param] = @model_object.to_param
-    session[:project] = @model_object.serializable_hash
+    session[:project_param] = get_model_object.to_param
+    session[:project] = get_model_object.serializable_hash
     send_project_id_to_left_menu
   end
 

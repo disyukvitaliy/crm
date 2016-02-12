@@ -1,4 +1,5 @@
 class Setting < ActiveRecord::Base
+  include UseBasePolicyConcern
   before_create :only_one_row
 
   private

@@ -14,6 +14,10 @@ class Admin::UsersController < ApplicationController
   end
 
   def prepared_params
-    super { [:email, :password, :password_confirmation, :status] }
+    super { [:email, :password, :password_confirmation, :status, :role_id] }
+  end
+
+  def has_many_relations
+    {accessed_projects: UserProjectsHelper}
   end
 end

@@ -7,3 +7,17 @@
 .datepicker table tr td.focused{
   background: #DF691A none repeat scroll 0% 0%
 }
+
+.dropdown-menu{
+    box-shadow: 0 0 10px -2px #000;
+}
+
+.multiselect-container.dropdown-menu > li > a{
+    padding-left: 30px;
+}
+
+.multiselect-container.dropdown-menu>.active>a,
+.multiselect-container.dropdown-menu>.active>a:hover,
+.multiselect-container.dropdown-menu>.active>a:focus{
+    background-color: transparent;
+}

@@ -4,6 +4,8 @@ module CrudConcern
   included do
     before_action :init_model_classes
     before_action :set_model_object, only: [:show, :edit, :update, :destroy]
+    before_action only: [:show, :edit, :update, :destroy] { authorize @model_object }
+    before_action only: [:index, :new, :create] { authorize @model_class }
   end
 
   def index
@@ -17,8 +19,12 @@ module CrudConcern
     @model_object = block_given? ? yield : @model_class.new
   end
 
+  def edit
+  end
+
   def create
     @model_object = build_model_object(prepared_params)
+    update_has_many_relations(@model_object)
     @model_object.save
 
     yield @model_object if block_given?
@@ -31,6 +37,7 @@ module CrudConcern
   end
 
   def update
+    update_has_many_relations(@model_object)
     @model_object.update(prepared_params)
 
     yield @model_object if block_given?
@@ -89,6 +96,11 @@ module CrudConcern
     @model_object = @model_class.find(params[:id])
   end
 
+  # @return [ActiveRecord::Base]
+  def get_model_object
+    @model_object
+  end
+
   # build new model object from params
   # @param model_params [Hash]
   # @return [ActiveRecord::Base]
@@ -116,5 +128,28 @@ module CrudConcern
 
   def after_successful_js_destroy
     render js: "window.location = '#{request.referer}'"
+  end
+
+  # @return [Hash] - hash of relations
+  # @example
+  #
+  #   class Project
+  #     has_many :issues
+  #     has_many :users
+  #   end
+  #
+  #   {issues: IssuesHelper, users: UsersHelper}
+  #
+  # Helper module must implement update method
+  def has_many_relations
+    {}
+  end
+
+  # @param model_object [ActiveRecord::Base]
+  def update_has_many_relations(model_object)
+    has_many_relations.each do |relation, helper|
+      raise NotImplementedError, "#{helper} must implement update method" unless helper.respond_to?(:update)
+      helper.update(model_object, params[model_object.model_name.singular][relation] || [])
+    end
   end
 end

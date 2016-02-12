@@ -8,7 +8,8 @@ class Seeds::PopulateIssuesService
         is.due_date = p.id.day.from_now.strftime('%Y-%m-%d')
         is.issue_status_id = nil
         is.issue_priority_id = nil
-        is.estimated_time = 1
+        is.estimated_time = 1.5
+        is.user_id = User.first.id
       end
     end
   end

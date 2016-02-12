@@ -4,6 +4,7 @@ class Seeds::CreateAdminService
       user.password = Rails.application.secrets.admin_password
       user.password_confirmation = Rails.application.secrets.admin_password
       user.status = User.statuses[:active]
+      user.role_id = Role.first.id
     end
   end
 end
