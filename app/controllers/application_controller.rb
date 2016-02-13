@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
   before_action :authenticate_user!, :send_project_id_to_left_menu, :load_settings
+  rescue_from Pundit::NotAuthorizedError, with: :have_no_access
 
   protected
 
@@ -21,4 +22,7 @@ class ApplicationController < ActionController::Base
     @settings = Setting.first
   end
 
+  def have_no_access
+    render plain: 'You have no access to this page!', status: :unauthorized
+  end
 end

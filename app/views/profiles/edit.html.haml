@@ -1,0 +1,13 @@
+%h3 Edit profile
+
+- content_for(:form_url) {profile_path}
+- content_for(:delete) {'<span></span>'}
+
+= render layout: 'crud/form' do |f|
+  = f.text_field :first_name, placeholder: 'First name'
+  = f.text_field :second_name, placeholder: 'Second name'
+  = f.text_field :birthday, placeholder: 'Birthday', 'data-provide' => 'datepicker', 'data-date-format' => 'yyyy-mm-dd'
+  .form-group
+    .col-sm-10.col-sm-offset-2
+      = image_tag current_user.profile.ava.url(:medium), class: 'img-bordered'
+  = f.file_field :ava

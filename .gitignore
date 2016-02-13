@@ -1,5 +1,6 @@
 tmp/
 log/
+public/system/
 config/database.yml
 .byebug_history
 

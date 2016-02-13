@@ -15,5 +15,7 @@ Seeds::PopulateActivitiesService.new.call
 puts 'activities table has been populated'
 Seeds::PopulateProjectsService.new.call
 puts 'projects table has been populated'
+Seeds::PopulateUserProjects.new.call
+puts 'user_projects table has been populated'
 Seeds::PopulateIssuesService.new.call
 puts 'issues table has been populated'

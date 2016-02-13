@@ -1,36 +1,11 @@
-body{
-  padding-top: 30px;
+body {
+    padding-top: 30px;
 }
 
-/*avatar block*/
-.panel-ava{
-  padding: 15px 0 5px;
+.panel-ava {
+    padding: 15px 0 5px;
 }
 
-.panel-ava img{
-  border: solid 1px;
-}
-
-/*some troubles with duplication of pagination class*/
-#grid div.pagination{
-  margin: 0;
-}
-
-/*grid filter buttons*/
-.filter_icons div{
-  text-decoration: underline;
-  font-weight: normal;
-  cursor: pointer;
-  line-height: 30px;
-  margin-right: 5px;
-  font-size: 12px;
-  float: left;
-}
-
-#grid_submit_grid_icon:before{
-  content: 'Submit';
-}
-
-#grid_reset_grid_icon:before{
-  content: 'Reset';
+.img-bordered {
+    border: solid 1px;
 }

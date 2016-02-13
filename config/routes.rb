@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       passwords: 'auth/passwords'
   }
 
+  resource :profile, only: [:edit, :update]
+
   resources :projects do
     resources :issues, shallow: true do
       resources :time_entries, shallow: true

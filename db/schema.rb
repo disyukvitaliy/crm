@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210074848) do
+ActiveRecord::Schema.define(version: 20160212102441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,21 @@ ActiveRecord::Schema.define(version: 20160210074848) do
   end
 
   add_index "permissions", ["section", "action"], name: "index_permissions_on_section_and_action", using: :btree
+
+  create_table "profiles", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "second_name"
+    t.date     "birthday"
+    t.string   "ava_file_name"
+    t.string   "ava_content_type"
+    t.integer  "ava_file_size"
+    t.datetime "ava_updated_at"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.text     "title",                            null: false
@@ -160,6 +175,7 @@ ActiveRecord::Schema.define(version: 20160210074848) do
   add_foreign_key "issues", "issue_statuses", name: "fk_issues_on_issue_status_id", on_delete: :nullify
   add_foreign_key "issues", "projects", name: "fk_issues_on_project_id", on_delete: :restrict
   add_foreign_key "issues", "users", name: "fk_issues_on_user_id", on_delete: :nullify
+  add_foreign_key "profiles", "users", name: "fk_profile_on_user_id", on_delete: :cascade
   add_foreign_key "projects", "users", name: "fk_projects_on_user_id", on_delete: :nullify
   add_foreign_key "role_permissions", "permissions", name: "fk_role_permissions_on_permission_id", on_delete: :cascade
   add_foreign_key "role_permissions", "roles", name: "fk_role_permissions_on_role_id", on_delete: :cascade

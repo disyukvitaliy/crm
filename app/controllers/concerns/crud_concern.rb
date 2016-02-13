@@ -91,7 +91,7 @@ module CrudConcern
   end
 
   def set_model_object
-    @model_object = @model_class.find(params[:id])
+    @model_object = block_given? ? yield : @model_class.find(params[:id])
   end
 
   # @return [ActiveRecord::Base]

@@ -1,6 +1,6 @@
 class Admin::EnumeratorsController < ApplicationController
   include AdminControllerConcern
-  
+
   def index
     authorize Activity
     authorize IssuePriority
