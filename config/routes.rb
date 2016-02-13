@@ -46,7 +46,7 @@ Rails.application.routes.draw do
         put 'set_default'
       end
     end
-    resources :settings, only: [:edit, :update]
+    resource :settings, only: [:edit, :update]
   end
 
   # Example of regular route:

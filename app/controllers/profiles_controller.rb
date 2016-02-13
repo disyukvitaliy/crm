@@ -16,6 +16,6 @@ class ProfilesController < ApplicationController
   end
 
   def redirect_after_successful_update
-    redirect_to edit_profile_path, notice: 'Has successfully updated'
+    super { edit_profile_path }
   end
 end

@@ -1,7 +1,7 @@
 %h3 Edit Settings
 
-- content_for :delete do
-  - '<span></span>'
+- content_for(:form_url) {settings_path}
+- content_for(:delete) { '<span></span>' }
 
 = render layout: 'crud/form' do |f|
   =f.text_field :site_name, placeholder: 'Site name'

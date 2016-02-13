@@ -112,7 +112,7 @@ module CrudConcern
   end
 
   def redirect_after_successful_update
-    redirect_to({action: :edit, id: @model_object.to_param}, notice: 'Has successfully updated')
+    redirect_to(block_given? ? yield : {action: :edit, id: @model_object.to_param}, notice: 'Has successfully updated')
   end
 
   def redirect_after_successful_create
