@@ -10,6 +10,7 @@ Awesome CRM is my test project. I do it for learning purpose.
   - Working with relations, migrations, seeds and resource-based routing
   - Database design (PostgreSQL)
   - Using devise for authorisation
+  - Smart role-permissions system based on pundit gem
   - Writing readable and understandable code
   - Documenting code with YARD
   - Testing code with RSpec, Capybara
@@ -19,10 +20,10 @@ Awesome CRM is my test project. I do it for learning purpose.
   - Work on the Ubuntu operating system
   
 ### To do
-  - Setting user permissions and roles using pundit gem configurable via admin part
   - Upgrade tests. Make them smarter
   - REST API for retrieving data from system. Make gem for this
   - Use Redis
+  - Use Elasticsearch
   - Something else to improve skills
 
 ### Installation is pretty simple
