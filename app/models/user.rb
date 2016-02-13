@@ -14,8 +14,6 @@ class User < ActiveRecord::Base
   has_many :time_entries
   has_one :profile
 
-  validates_presence_of :role
-
   # Create profile for new User record
   after_create { Profile.create_for self }
 
