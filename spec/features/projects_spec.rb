@@ -2,26 +2,6 @@ require 'rails_helper'
 
 RSpec.feature Project, type: :feature do
 
-  def manipulate_project(action, *fields)
-    within('.form-horizontal') do
-      fill_in :title, with: fields.shift
-      click_button action
-    end
-  end
-
-  def create_project_with(title)
-    manipulate_project('Create', title)
-  end
-
-  def update_project_with(title)
-    manipulate_project('Update', title)
-  end
-
-  # create new valid project
-  def create_valid_project
-    create_project_with 'Some test project'
-  end
-
   before { sign_in }
 
   describe 'Check links on project pages' do
@@ -47,6 +27,29 @@ RSpec.feature Project, type: :feature do
       it { expect(page.status_code).to eql(200) if find('#main-block-right').click_link('Issues') || true; }
       it { expect(page.status_code).to eql(200) if find('#main-block-right').click_link('New issue') || true; }
 
+    end
+  end
+
+  describe 'Check left menu links' do
+
+    context 'with no project selected' do
+
+      before { visit projects_path }
+
+      it { expect(page).not_to have_selector('#main-block-left', text: 'Issues') }
+      it { expect(page).not_to have_selector('#main-block-left', text: 'New issue') }
+      it { expect(page).not_to have_selector('#main-block-left', text: 'News') }
+      it { expect(page).not_to have_selector('#main-block-left', text: 'Wiki') }
+    end
+
+    context 'with some project selected' do
+
+      before { visit project_path Project.first }
+
+      it { expect(page.status_code).to eql(200) if find('#main-block-left').click_link('Issues') || true; }
+      it { expect(page.status_code).to eql(200) if find('#main-block-left').click_link('New issue') || true; }
+      it { expect(page.status_code).to eql(200) if find('#main-block-left').click_link('News') || true; }
+      it { expect(page.status_code).to eql(200) if find('#main-block-left').click_link('Wiki') || true; }
     end
   end
 

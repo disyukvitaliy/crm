@@ -2,9 +2,36 @@ require 'rails_helper'
 
 RSpec.feature 'Authorization', type: :feature do
 
-  let(:right) { {user_email: 'admin@example.com', user_password: 'adminexample'} }
   let(:wrong) { {user_email: 'wrong@user.com', user_password: 'wrong_password'} }
   let(:new) { {user_email: 'test@test.com', user_password: 'testtest'} }
+
+  describe 'Checking links on authorization pages' do
+
+    context 'sign in page' do
+
+      before { visit new_user_session_path }
+
+      it { expect(page.status_code).to eql(200) if find('.navbar').click_link('Log in') || true; }
+      it { expect(page.status_code).to eql(200) if find('.navbar').click_link('Sign up') || true; }
+      it { expect(page.status_code).to eql(200) if find('.well').click_link('Sign up') || true; }
+      it { expect(page.status_code).to eql(200) if find('.well').click_link('Forgot your password?') || true; }
+    end
+
+    context 'sign up page' do
+
+      before { visit new_user_registration_path }
+
+      it { expect(page.status_code).to eql(200) if find('.well').click_link('Log in') || true; }
+    end
+
+    context 'Password recovery page' do
+
+      before { visit new_user_password_path }
+
+      it { expect(page.status_code).to eql(200) if find('.well').click_link('Log in') || true; }
+      it { expect(page.status_code).to eql(200) if find('.well').click_link('Sign up') || true; }
+    end
+  end
 
   describe 'Try of not authorized access' do
 
@@ -60,14 +87,14 @@ RSpec.feature 'Authorization', type: :feature do
     context 'with not matching passwords' do
       it 'show warning messages' do
 
-        sign_up_with right[:user_email], right[:user_password], wrong[:user_password]
+        sign_up_with new[:user_email], new[:user_password], wrong[:user_password]
 
         expect(page).to have_selector('.alert-danger', text: "Password confirmation doesn't match Password")
 
       end
     end
 
-    context 'with right data' do
+    context 'with valid data' do
       it 'sign up us and redirect to sign in page with notice' do
 
         sign_up_with new[:user_email], new[:user_password], new[:user_password]
@@ -111,7 +138,7 @@ RSpec.feature 'Authorization', type: :feature do
     context 'with valid form inputs' do
       it 'authorise us and redirect to root path' do
 
-        sign_in_with right[:user_email], right[:user_password]
+        sign_in
 
         expect(page).not_to have_selector('h2', text: 'Log in')
         expect(page).not_to have_selector('.alert-danger')
@@ -122,7 +149,7 @@ RSpec.feature 'Authorization', type: :feature do
     end
   end
 
-  describe 'Password recovery' do
+  describe 'Password recovery process' do
 
     context 'With wrong email' do
       it 'show warning message' do
@@ -135,7 +162,7 @@ RSpec.feature 'Authorization', type: :feature do
       end
     end
 
-    context 'With right email' do
+    context 'With valid email' do
       it 'send me email with recovery link' do
 
         visit new_user_registration_path
@@ -152,5 +179,14 @@ RSpec.feature 'Authorization', type: :feature do
 
       end
     end
+  end
+
+  describe 'Sign out process' do
+
+    before { sign_in }
+    context 'after sign in' do
+      it { expect(page.current_path).to eq(new_user_session_path) if click_link('Sign out') || true }
+    end
+
   end
 end

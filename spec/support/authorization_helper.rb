@@ -1,5 +1,6 @@
 module AuthorizationHelper
 
+  # sign in as valid user
   def sign_in
     visit new_user_session_path
     sign_in_with 'admin@example.com', 'adminexample'
