@@ -2,40 +2,131 @@ require 'rails_helper'
 
 RSpec.feature Project, type: :feature do
 
-  describe 'new project creation' do
+  def manipulate_project(action, *fields)
+    within('.form-horizontal') do
+      fill_in :title, with: fields.shift
+      click_button action
+    end
+  end
 
-    before :each do
-      visit new_project_path
+  def create_project_with(title)
+    manipulate_project('Create', title)
+  end
+
+  def update_project_with(title)
+    manipulate_project('Update', title)
+  end
+
+  # create new valid project
+  def create_valid_project
+    create_project_with 'Some test project'
+  end
+
+  before { sign_in }
+
+  describe 'Check links on project pages' do
+
+    context 'index page' do
+
+      before { visit projects_path }
+
+      it { expect(page.status_code).to eql(200) if click_link('Projects') || true; }
+      it { expect(page.status_code).to eql(200) if click_link('New project') || true; }
+      it { expect(page.status_code).to eql(200) if first('table.table tbody .title a').click || true; }
+      it { expect(page.status_code).to eql(200) if first('table.table tbody .actions').click_link('edit') || true; }
+      it { expect(page.status_code).to eql(200) if first('table.table tbody .actions').click_link('delete') || true; }
+
     end
 
-    context 'with valid form inputs' do
-      it 'create new project and redirect to index' do
+    context 'show page' do
 
-        within("#new_project") do
-          fill_in :title, with: :title
-          click_button 'Create'
-        end
+      before { visit project_path Project.first }
 
-        expect(page).to have_text('Projects')
-        expect(page).to have_selector('h3')
-        expect(Project.count).to eq(1)
+      it { expect(page.status_code).to eql(200) if find('#main-block-right').click_link('Edit') || true; }
+      it { expect(page.status_code).to eql(200) if find('#main-block-right').click_link('Back') || true; }
+      it { expect(page.status_code).to eql(200) if find('#main-block-right').click_link('Issues') || true; }
+      it { expect(page.status_code).to eql(200) if find('#main-block-right').click_link('New issue') || true; }
 
-      end
+    end
+  end
+
+  describe 'Creating a new project' do
+
+    before do
+      visit new_project_path
+      @project_count = Project.count
     end
 
     context 'with invalid form inputs' do
-      it 'do not create new project and render new template' do
+      it 'do not create new project and show alert message' do
 
-        within("#new_project") do
-          fill_in :title, with: ''
-          click_button 'Create'
-        end
+        create_project_with ''
 
-        expect(page).to have_text('New project')
-        expect(page).to have_button('Create')
-        expect(Project.count).to eq(0)
+        expect(page.status_code).to eql(200)
+        expect(page).to have_selector('.alert-danger', text: "Title can't be blank")
+        expect(Project.count).to eq(@project_count)
+
       end
     end
 
+    context 'with valid form inputs' do
+      it 'create new project and show success message' do
+
+        create_valid_project
+
+        expect(page.status_code).to eql(200)
+        expect(page).to have_selector('.alert-success', text: 'Has successfully created')
+        expect(Project.count).to eq(@project_count + 1)
+
+      end
+    end
+  end
+
+  describe 'Updating a project' do
+
+    before do
+      visit edit_project_path Project.first
+    end
+
+    context 'with invalid form inputs' do
+      it 'do not update project and show alert message' do
+
+        update_project_with ''
+
+        expect(page.status_code).to eql(200)
+        expect(page).to have_selector('.alert-danger', text: "Title can't be blank")
+
+      end
+    end
+
+    context 'with valid form inputs' do
+      it 'update project and show success message' do
+
+        update_project_with 'Some project'
+
+        expect(page.status_code).to eql(200)
+        expect(page).to have_selector('.alert-success', text: 'Has successfully updated')
+
+      end
+    end
+  end
+
+  describe 'Deleting a project' do
+
+    context 'delete via Delete button' do
+      it 'successfully delete project' do
+
+        visit new_project_path
+        create_valid_project
+
+        @project_count = Project.count
+
+        find('.form-horizontal').click_link('Delete')
+
+        expect(page.status_code).to eql(200)
+        expect(Project.count).to eq(@project_count - 1)
+
+      end
+    end
   end
 end

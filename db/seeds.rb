@@ -19,3 +19,5 @@ Seeds::PopulateUserProjects.new.call
 puts 'user_projects table has been populated'
 Seeds::PopulateIssuesService.new.call
 puts 'issues table has been populated'
+Seeds::SetvalIdSequencesService.new.call
+puts 'id sequences has been updated'

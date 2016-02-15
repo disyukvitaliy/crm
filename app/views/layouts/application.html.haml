@@ -11,9 +11,9 @@
     .container
       = render 'layouts/navbar_top'
       .row
-        .col-md-3
+        #main-block-left.col-md-3
           = render 'layouts/panel_ava'
           = render 'layouts/left_menu'
-        .col-md-9
+        #main-block-right.col-md-9
           = render 'layouts/breadcrumb'
           = yield
