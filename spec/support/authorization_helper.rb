@@ -1,9 +1,12 @@
 module AuthorizationHelper
 
   # sign in as valid user
+  # @return User - signed in user model
   def sign_in
+    user = User.find_by_email('admin@example.com')
     visit new_user_session_path
-    sign_in_with 'admin@example.com', 'adminexample'
+    sign_in_with user.email, 'adminexample'
+    user
   end
 
   def sign_in_with(*fields)

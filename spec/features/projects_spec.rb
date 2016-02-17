@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature Project, type: :feature do
 
-  before { sign_in }
+  before { @user = sign_in }
 
   describe 'Check links on project pages' do
 
@@ -116,18 +116,109 @@ RSpec.feature Project, type: :feature do
 
   describe 'Deleting a project' do
 
-    context 'delete via Delete button' do
-      it 'successfully delete project' do
+    context 'create new project without issues' do
 
-        visit new_project_path
-        create_valid_project
-
+      before do
+        @project = create(:project, creator: @user)
         @project_count = Project.count
+      end
 
-        find('.form-horizontal').click_link('Delete')
+      context 'delete it via edit page' do
+        it 'successfully delete project' do
 
+          visit edit_project_path @project
+          find('.form-horizontal').click_link('Delete')
+          expect(page.status_code).to eql(200)
+          expect(Project.count).to eq(@project_count - 1)
+
+        end
+      end
+
+      context 'delete it via index page' do
+        it 'successfully delete project' do
+
+          visit projects_path
+
+          within '#new_projects_grid' do
+            fill_in :projects_grid_title, with: @project.title
+            click_button 'Search'
+          end
+
+          first('table.table tbody .actions').click_link('delete')
+          expect(page.status_code).to eql(200)
+          expect(Project.count).to eq(@project_count - 1)
+
+        end
+      end
+    end
+
+    context 'create new project with issues' do
+
+      before do
+        @project = create(:project, :with_issues, creator: @user)
+        @project_count = Project.count
+      end
+
+      context 'delete it via edit page' do
+        it 'do not delete project and show alert' do
+
+          visit edit_project_path @project
+          find('.form-horizontal').click_link('Delete')
+          expect(page.status_code).to eql(200)
+          expect(page).to have_selector('.alert-danger', text: 'Cannot delete record because dependent issues exist')
+          expect(Project.count).to eq(@project_count)
+
+        end
+      end
+
+      context 'delete it via index page' do
+        it 'don not delete project and show alert' do
+
+          visit projects_path
+
+          within '#new_projects_grid' do
+            fill_in :projects_grid_title, with: @project.title
+            click_button 'Search'
+          end
+
+          first('table.table tbody .actions').click_link('delete')
+          expect(page.status_code).to eql(200)
+          expect(Project.count).to eq(@project_count)
+
+        end
+      end
+    end
+  end
+
+  describe 'Access to project' do
+
+    context 'created by another user' do
+      it 'show me 401 page' do
+
+        project = create(:project)
+        visit project_path project
+        expect(page.status_code).to eql(401)
+
+      end
+    end
+
+    context 'created by me' do
+      it 'show me project page' do
+
+        project = create(:project, creator: @user)
+        visit project_path project
         expect(page.status_code).to eql(200)
-        expect(Project.count).to eq(@project_count - 1)
+
+      end
+    end
+
+    context 'created by another user and then added to my accessed_projects association' do
+      it 'show me project page' do
+
+        project = create(:project)
+        project.accessed_users << @user
+        visit project_path project
+        expect(page.status_code).to eql(200)
 
       end
     end
