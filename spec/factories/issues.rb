@@ -13,5 +13,9 @@ FactoryGirl.define do
         issue.time_entries << create(:time_entry, issue: issue)
       end
     end
+
+    factory :invalid_issue do
+      subj ''
+    end
   end
 end

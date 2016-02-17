@@ -8,5 +8,9 @@ FactoryGirl.define do
         project.issues << create(:issue, project: project)
       end
     end
+
+    factory :invalid_project do
+      title ''
+    end
   end
 end
